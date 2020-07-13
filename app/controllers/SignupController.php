@@ -11,9 +11,6 @@ class SignupController extends Controller
 	public function registerAction()
     {
 		$user = new User();
-		echo $this->request->getPost()['name'];
-		echo $this->request->getPost()['email'];
-		echo $this->request->getPost()['password'];
 		
 		$user->name = $this->request->getPost()['name'];
 		$user->email = $this->request->getPost()['email'];
