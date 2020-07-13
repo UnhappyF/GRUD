@@ -1,0 +1,30 @@
+<div align=center><h2>Sign up</h2>
+
+<?php echo $this->tag->form("signup/register"); ?>
+
+   <table>
+   <tr><td>
+        <label for="login">Login</label></td>
+		<td>
+        <?php echo $this->tag->textField("name"); ?></td>
+   </tr>
+
+   <tr><td>
+        <label for="email">EMail</label></td>
+		<td>
+        <?php echo $this->tag->textField("email"); ?></td>
+    </tr>
+	
+	<tr><td>
+        <label for="password">Pass </label></td>
+		<td>
+        <?php echo $this->tag->textField("password"); ?></td>
+   </tr>
+
+    <tr><td>
+        <?php echo $this->tag->submitButton("Register"); ?></td>
+	</tr>
+    </table>
+
+</form>
+</div>
