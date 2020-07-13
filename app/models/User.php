@@ -1,11 +1,12 @@
 <?php
+
 use Phalcon\Mvc\Model;
 
-class Users extends Model{
+class User extends Model{
 	
 public $id;
 public $name;
-public $phone
+public $phone;
 public $email;
 public $password;
 
