@@ -6,7 +6,6 @@ class User extends Model{
 	
 public $id;
 public $name;
-public $phone;
 public $email;
 public $password;
 
