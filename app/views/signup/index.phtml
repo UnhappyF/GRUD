@@ -1,30 +1,46 @@
-<div align=center><h2>Sign up</h2>
-
-<?php echo $this->tag->form("signup/register"); ?>
-
-   <table>
-   <tr><td>
-        <label for="login">Login</label></td>
-		<td>
-        <?php echo $this->tag->textField("name"); ?></td>
-   </tr>
-
-   <tr><td>
-        <label for="email">EMail</label></td>
-		<td>
-        <?php echo $this->tag->textField("email"); ?></td>
-    </tr>
-	
-	<tr><td>
-        <label for="password">Pass </label></td>
-		<td>
-        <?php echo $this->tag->textField("password"); ?></td>
-   </tr>
-
-    <tr><td>
-        <?php echo $this->tag->submitButton("Register"); ?></td>
-	</tr>
-    </table>
-
-</form>
-</div>
+<body>
+	<br>
+	<br>
+	<br>
+	<div class="container-fluid">
+    <?php echo $this->tag->form("signup/register"); ?>
+    <br>
+	<br>
+    	  <div class="form-group">
+    	  	<div class="row">
+    	  	<div class="col-md-4"></div>
+    	  	<div class="col-md-4" style="background-color: silver; ">
+    	  	<h1 class="text-center">Регистрация</h1>
+    		  <label for="email">Логин</label>
+    		  <input type="text" class="form-control" id="name" placeholder="Введите логин"  name="name">
+    	    </div>
+    	  </div>
+    	  	
+			<div class="row">
+    	  	<div class="col-md-4"></div>
+    	  	<div class="col-md-4" style="background-color: silver">
+    		  <label for="email">Email адрес</label>
+    		  <input type="email" class="form-control" id="email" placeholder="Введите email"  name="email">
+    		  
+    		
+			</div>
+			</div>
+			<div class="row">
+    	  	<div class="col-md-4"></div>
+    	  	<div class="col-md-4" style="background-color: silver">
+    		  <label for="password">Пароль</label>
+    		  <input type="password" class="form-control" id="password" placeholder="Введите пароль" name="password">
+    		  
+    		  <br>
+    		  <?php echo $this->tag->submitButton(["Регистрация", 'class' => 'btn btn-success  btn-block']); ?>
+    		  </form>
+    		  <br>
+    		 
+    		  <br>
+    	    </div>
+    	  </div>
+    	  </div>
+    	</div>
+    	</div>
+    </div>
+</body>
