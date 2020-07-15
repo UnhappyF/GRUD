@@ -63,19 +63,38 @@ $di->setShared('view', function () {
 /**
  * Database connection is created based in the parameters defined in the configuration file
  */
-$di->setShared('db', function () {
+$di->setShared('dbUsers', function () {
     $config = $this->getConfig();
 
-    $class = 'Phalcon\Db\Adapter\Pdo\\' . $config->database->adapter;
+    $class = 'Phalcon\Db\Adapter\Pdo\\' . $config->databaseUsers->adapter;
     $params = [
-        'host'     => $config->database->host,
-        'username' => $config->database->username,
-        'password' => $config->database->password,
-        'dbname'   => $config->database->dbname,
-        'charset'  => $config->database->charset
+        'host'     => $config->databaseUsers->host,
+        'username' => $config->databaseUsers->username,
+        'password' => $config->databaseUsers->password,
+        'dbname'   => $config->databaseUsers->dbname,
+        'charset'  => $config->databaseUsers->charset
     ];
 
-    if ($config->database->adapter == 'Postgresql') {
+    if ($config->databaseUsers->adapter == 'Postgresql') {
+        unset($params['charset']);
+    }
+
+    return new $class($params);
+});
+
+$di->setShared('dbPhonebook', function () {
+    $config = $this->getConfig();
+
+    $class = 'Phalcon\Db\Adapter\Pdo\\' . $config->databasePhonebook->adapter;
+    $params = [
+        'host'     => $config->databasePhonebook->host,
+        'username' => $config->databasePhonebook->username,
+        'password' => $config->databasePhonebook->password,
+        'dbname'   => $config->databasePhonebook->dbname,
+        'charset'  => $config->databasePhonebook->charset
+    ];
+
+    if ($config->databasePhonebook->adapter == 'Postgresql') {
         unset($params['charset']);
     }
 
