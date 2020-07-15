@@ -1,9 +1,19 @@
 <?php
-
+use Phalcon\Mvc\Model\Query;
 echo '<p align=center>';
 echo '<table>';
 
+$query = new Query(
+    'SELECT * FROM people',
+    $this->getDI()
+);
 
+// Execute the query returning a result if any
+$peopls = $query->execute();
+
+foreach ($peopls as $people) {
+    echo 'Name: ', $people->name, "\n";
+}
 
 echo '</table>';
 echo '</p>';
