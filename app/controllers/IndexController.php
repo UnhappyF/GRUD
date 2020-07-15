@@ -20,13 +20,15 @@ class IndexController extends ControllerBase
                     'pass'=>$pass,
                 ],
 
-            ]);
+            ]
+        );
         if($mail == "" || $pass == ""){
             echo "Почта или пароль не введены";
         }
         else if($user->count() ==1)
         {
-            header("Location: /phonebook");
+            echo $user->count();
+           # header("Location: /phonebook");
         }
         else
         {

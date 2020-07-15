@@ -10,13 +10,40 @@ class SignupController extends Controller
     }
 	public function registerAction()
     {
-		$user = new User();
-		
+    	$user = new User();
+		$success =FALSE;
+		#Проверка почты на существование
+		$mail =$this->request->getPost()['email'];
+		$mailFind = User::find(
+			  [
+                'email=:mail:',
+                'bind'=>[
+                    'mail'=>$mail,
+                ],
+            ]
+		);
+        #Проверка ника на существование
+        $name =$this->request->getPost()['name'];
+		$nameFind = User::find(
+			  [
+                'name=:name:',
+                'bind'=>[
+                    'name'=>$name,
+                ],
+            ]
+		);
+		if($nameFind->count()!=0){
+			echo "Данный никнейм занят, введите другой";
+		}
+		elseif ($mailFind->count()!=0){
+			echo "Данная почта уже зарегестрирована";
+		}
+		else{
 		$user->name = $this->request->getPost()['name'];
 		$user->email = $this->request->getPost()['email'];
 		$user->password = $this->request->getPost()['password'];
 		$success = $user->save();
-		
+	          }  
 		#$success = $user->save($this->request->getPost(), array('name', 'email','password'));
 		if ($success) {
 			echo "Регистрация прошла успешно!";
