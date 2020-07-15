@@ -1,18 +1,25 @@
 <?php
 use Phalcon\Mvc\Model\Query;
-echo '<p align=center>';
-echo '<table>';
+
 
 $query = new Query(
-    'SELECT * FROM people',
+    'SELECT people.name, phonenumber.phoneNumber FROM phonenumber JOIN people ON phonenumber.idPeople = people.id',
     $this->getDI()
 );
 
 // Execute the query returning a result if any
-$peopls = $query->execute();
+$raws = $query->execute();
 
-foreach ($peopls as $people) {
-    echo 'Name: ', $people->name, "\n";
+echo '<p align=center>';
+echo '<table>';
+echo '<tr>';
+echo '<td>Name</td><td>Phone</td>';
+echo '</tr>';
+	
+foreach ($raws as $raw) {
+	echo '<tr>';
+    echo '<td>', $raw->name, '</td><td>', $raw->phoneNumber, '</td>';
+	echo '</tr>';
 }
 
 echo '</table>';
