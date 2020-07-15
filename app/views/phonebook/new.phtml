@@ -49,9 +49,9 @@
     	  	<div class="col-md-4"></div>
     	  	<div class="col-md-4" style="background-color: silver">
     		  <label for="typePhone">Тип номера</label>
-				<select>
-				<option value="Рабочий">Рабочий</option>
-				<option value="Личный">Личный</option>
+				<select name = "typeNumber">
+				<option value="1">Личный</option>
+				<option value="2">Рабочий</option>
 				</select>
     		  
     		
@@ -105,7 +105,7 @@
     	  	<div class="col-md-4"></div>
     	  	<div class="col-md-4" style="background-color: silver">
     		  
-    		  <p><input type="checkbox" name="important" value="Выжный контакт"> Важный контакт</p>	
+    		  <p><input type="checkbox" name="important" value="1"> Важный контакт</p>	
     		  <?php echo $this->tag->submitButton(["Добавить контакт", 'class' => 'btn btn-success  btn-block']); ?>
 			  <br>
     		  </form>
