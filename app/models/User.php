@@ -9,5 +9,11 @@ public $name;
 public $email;
 public $password;
 
+
+public function initialize()
+{
+    $this->setConnectionService('dbUsers');
+}
+
 }
 ?>

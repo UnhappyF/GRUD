@@ -20,6 +20,7 @@ class SignupController extends Controller
 		#$success = $user->save($this->request->getPost(), array('name', 'email','password'));
 		if ($success) {
 			echo "Регистрация прошла успешно!";
+			echo $this->tag->linkTo("phonebook", "Перейти к справочнику");
 		} else {
 			echo "Ошибка: <br/>";
 			foreach ($user->getMessages() as $message) {

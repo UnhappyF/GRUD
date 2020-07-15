@@ -1,0 +1,27 @@
+<?php
+use Phalcon\Mvc\Model\Query;
+
+
+$query = new Query(
+    'SELECT people.name, phonenumber.phoneNumber FROM phonenumber JOIN people ON phonenumber.idPeople = people.id',
+    $this->getDI()
+);
+
+// Execute the query returning a result if any
+$raws = $query->execute();
+
+echo '<p align=center>';
+echo '<table>';
+echo '<tr>';
+echo '<td>Name</td><td>Phone</td>';
+echo '</tr>';
+	
+foreach ($raws as $raw) {
+	echo '<tr>';
+    echo '<td>', $raw->name, '</td><td>', $raw->phoneNumber, '</td>';
+	echo '</tr>';
+}
+
+echo '</table>';
+echo '</p>';
+?>
