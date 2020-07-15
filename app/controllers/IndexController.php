@@ -10,22 +10,28 @@ class IndexController extends ControllerBase
     }
     public function signinAction()
     {
-    	if ($this->request->isPost()) {
-    	$mail = $this->request->getPost('email');
-    	$pass = $this->request->getPost('password');
+        $mail = $this->request->getPost('email');
+        $pass = $this->request->getPost('password');    
+        $user = User::find(
+            [
+                'email=:mail: AND password = :pass:',
+                'bind'=>[
+                    'mail'=>$mail,
+                    'pass'=>$pass,
+                ],
 
-    	if($mail != "" && $pass!=""){
-    		echo "Успешный вход, временно так, потом будет лучше";
-    	}
-    	else if($mail == ""){
-    		echo "Почта не введена";
-    	}
-    	else if ($pass == "") {
-    		echo "<br>Пароль не введен";
-    	}
-    }
-
-
+            ]);
+        if($mail == "" || $pass == ""){
+            echo "Почта или пароль не введены";
+        }
+        else if($user->count() ==1)
+        {
+            header("Location: /phonebook");
+        }
+        else
+        {
+            echo "Неправильный логин или пароль";
+        }
     }
 
 }
