@@ -1,5 +1,43 @@
-<?php
-use Phalcon\Mvc\Model\Query;
 
-echo 'search form will be here';
+<table>
+<thead>
+<tr>
+<th>Id</th>
+<th>Имя</th>
+<th>Телефон</th>
+
+</tr>
+</thead>
+<tbody>
+
+<?php
+
+foreach($page->items as $people){
+echo '
+<tr>
+<td>'.$people->name.' </td>
+<td>'.$people->phone.' </td>
+
+</tr>';
+}
+
+echo '
+</tbody>
+<tbody>
+<tr>
+<td colspan="7">
+<div>';
+$this->tag->linkTo("phonebook/search", "Первая");
+$this->tag->linkTo("phonebook/search?page=".$page->previous, "Предыдущая");
+$this->tag->linkTo("phonebook/search?page=".$page->next, "Следующая");
+$this->tag->linkTo("phonebook/search?page=".$page->last, "Последняя");
+
+echo '<span class="help-inline">'.$page->current.' из'. $page->last .'</span>
+</div>
+</td>
+</tr>
+</tbody>
+</table>';
+
+
 ?>
