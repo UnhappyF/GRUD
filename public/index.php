@@ -2,6 +2,8 @@
 declare(strict_types=1);
 
 use Phalcon\Di\FactoryDefault;
+use Phalcon\Mvc\Dispatcher;
+use Phalcon\Events\Manager;
 
 error_reporting(E_ALL);
 
@@ -39,6 +41,26 @@ try {
      * Handle the request
      */
     $application = new \Phalcon\Mvc\Application($di);
+
+
+$di->set(
+    'dispatcher',
+    function () {
+        $eventsManager = new Manager();
+
+        $eventsManager->attach(
+            'dispatch:beforeExecuteRoute',
+            new SecurityPlugin()
+        );
+
+
+        $containerspatcher = new Dispatcher();
+
+        $containerspatcher->setEventsManager($eventsManager);
+
+        return $containerspatcher;
+    }
+);
 
     echo $application->handle($_SERVER['REQUEST_URI'])->getContent();
 } catch (\Exception $e) {
