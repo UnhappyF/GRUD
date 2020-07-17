@@ -7,6 +7,7 @@ class IndexController extends ControllerBase
     public function indexAction()
     {
 
+
     }
 
     private function _registerSession($user)
@@ -22,6 +23,8 @@ class IndexController extends ControllerBase
 
     public function signinAction()
     {
+         echo "WELCOME";
+         
         if($this->request->isPost()){
             $mail = $this->request->getPost('email');
             $pass = $this->request->getPost('password');  
