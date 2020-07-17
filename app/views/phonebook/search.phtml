@@ -12,11 +12,11 @@
 
 <?php
 
-foreach($page->items as $people){
+foreach($page->GetItems() as $people){
 echo '
 <tr>
-<td>'.$people->name.' </td>
-<td>'.$people->phone.' </td>
+<td>'.$people["name"].' </td>
+<td>'.$people["id"].' </td>
 
 </tr>';
 }
@@ -27,10 +27,10 @@ echo '
 <tr>
 <td colspan="7">
 <div>';
-$this->tag->linkTo("phonebook/search", "Первая");
-$this->tag->linkTo("phonebook/search?page=".$page->previous, "Предыдущая");
-$this->tag->linkTo("phonebook/search?page=".$page->next, "Следующая");
-$this->tag->linkTo("phonebook/search?page=".$page->last, "Последняя");
+echo $this->tag->linkTo("phonebook/search", "Первая");
+echo $this->tag->linkTo("phonebook/search?page=".$page->previous, "Предыдущая");
+echo $this->tag->linkTo("phonebook/search?page=".$page->next, "Следующая");
+echo $this->tag->linkTo("phonebook/search?page=".$page->last, "Последняя");
 
 echo '<span class="help-inline">'.$page->current.' из'. $page->last .'</span>
 </div>
