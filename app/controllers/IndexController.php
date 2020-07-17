@@ -24,21 +24,16 @@ class IndexController extends ControllerBase
     public function signinAction()
     {
          echo "WELCOME";
-         
         if($this->request->isPost()){
-            $mail = $this->request->getPost('email');
-            $pass = $this->request->getPost('password');  
             $user = User::findFirst(
             [
-                'email=:mail: AND password = :pass:',
+                'email=:mail:',
                 'bind'=>[
-                    'mail'=>$mail,
-                    'pass'=>$pass,
+                    'mail'=>$mail=$this->request->getPost('email'),
                 ],
-
             ]
         );
-        if ($user !== null) {
+        if ($user !== null && password_verify($this->request->getPost()['password'], $user->password)) {
             $this->_registerSession($user);
 
             $this->flash->success(

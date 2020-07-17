@@ -41,7 +41,7 @@ class SignupController extends Controller
 		else{
 		$user->name = $this->request->getPost()['name'];
 		$user->email = $this->request->getPost()['email'];
-		$user->password = $this->request->getPost()['password'];
+		$user->password = password_hash($this->request->getPost()['password'], PASSWORD_DEFAULT);
 		$success = $user->save();
 	          }  
 		#$success = $user->save($this->request->getPost(), array('name', 'email','password'));

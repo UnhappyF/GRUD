@@ -32,7 +32,7 @@ class SecurityPlugin extends Injectable
         $allowed = $acl->isAllowed($role, $controller, $action);
         if (true !== $allowed) {
             $this->flash->error(
-                "У вас нет прав для доступа сюда"
+                "Ввойдите в акаунт для работы с сайтом"
             );
 
             $containerspatcher->forward(
