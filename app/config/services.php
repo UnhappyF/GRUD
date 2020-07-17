@@ -10,7 +10,7 @@ use Phalcon\Mvc\View\Engine\Volt as VoltEngine;
 use Phalcon\Session\Adapter\Stream as SessionAdapter;
 use Phalcon\Session\Manager as SessionManager;
 use Phalcon\Url as UrlResolver;
-
+use Phalcon\Session\Bag  as SessionBag;
 /**
  * Shared configuration service
  */
@@ -139,3 +139,11 @@ $di->setShared('session', function () {
 
     return $session;
 });
+
+$di->set(
+    'sessionBag',
+    function () {
+        $session_bag = new SessionBag("sessionBag");
+        return $session_bag;
+}
+);
