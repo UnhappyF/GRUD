@@ -52,8 +52,6 @@ $di->set(
             'dispatch:beforeExecuteRoute',
             new SecurityPlugin()
         );
-
-
         $containerspatcher = new Dispatcher();
 
         $containerspatcher->setEventsManager($eventsManager);

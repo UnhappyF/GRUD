@@ -32,7 +32,7 @@ class SecurityPlugin extends Injectable
         $allowed = $acl->isAllowed($role, $controller, $action);
         if (true !== $allowed) {
             $this->flash->error(
-                "You do not have access to this module"
+                "У вас нет прав для доступа сюда"
             );
 
             $containerspatcher->forward(
@@ -60,7 +60,7 @@ class SecurityPlugin extends Injectable
          $acl->addRole($role); 
      }
      $privateResources = array(
-      'phonebook' => array('index', 'search', 'new', 'edit', 'save', 'create', 'delete'), 
+      'phonebook' => array('index', 'search'), 
      );
      foreach ($privateResources as $componentName => $actions) {
     $acl->addComponent(
