@@ -1,0 +1,39 @@
+<body>
+	<br>
+	<br>
+	<br>
+	<div class="container-fluid">
+    <?php echo $this->tag->form("phonebook/search"); ?>
+    <br>
+	<br>
+    	  <div class="form-group">
+    	  	<div class="row">
+    	  	<div class="col-md-4"></div>
+    	  	<div class="col-md-4" style="background-color: silver; ">
+    	  	<h1 class="text-center">Поиск</h1>
+    		  <label for="name">Имя</label>
+    		  <input type="text" class="form-control" id="name" placeholder="Введите имя"  name="name">
+    	    </div>
+    	  </div>
+    	  	
+			<div class="row">
+    	  	<div class="col-md-4"></div>
+    	  	<div class="col-md-4" style="background-color: silver">
+    		  <label for="phone">Телефон</label>
+    		  <input type="text" class="form-control" id="phone" placeholder="Введите телефон"  name="phone">
+    		  
+    		
+			
+    		  
+    		  <br>
+    		  <?php echo $this->tag->submitButton(["Поиск", 'class' => 'btn btn-success  btn-block']); ?>
+    		  </form>
+			   <br>
+    		  
+    	    </div>
+    	  </div>
+    	  </div>
+    	</div>
+    	</div>
+    </div>
+</body>

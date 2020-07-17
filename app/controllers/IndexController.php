@@ -8,25 +8,61 @@ class IndexController extends ControllerBase
     {
 
     }
+
+    private function _registerSession($user)
+    {
+        $this->session->set(
+            'auth',
+            [
+                'id'   => $user->id,
+                'name' => $user->name,
+            ]
+        );
+    }
+
     public function signinAction()
     {
-    	if ($this->request->isPost()) {
-    	$mail = $this->request->getPost('email');
-    	$pass = $this->request->getPost('password');
+        if($this->request->isPost()){
+            $mail = $this->request->getPost('email');
+            $pass = $this->request->getPost('password');  
+            $user = User::findFirst(
+            [
+                'email=:mail: AND password = :pass:',
+                'bind'=>[
+                    'mail'=>$mail,
+                    'pass'=>$pass,
+                ],
 
-    	if($mail != "" && $pass!=""){
-    		echo "Успешный вход, временно так, потом будет лучше";
-    	}
-    	else if($mail == ""){
-    		echo "Почта не введена";
-    	}
-    	else if ($pass == "") {
-    		echo "<br>Пароль не введен";
-    	}
+            ]
+        );
+        if ($user !== null) {
+            $this->_registerSession($user);
+
+            $this->flash->success(
+            'Добро пожаловать ' . $user->name
+            );
+            #Если юзер прошел авторизацию, то пропускаем его к контактам
+            return $this->dispatcher->forward(
+                    [
+                        'controller' => 'phonebook',
+                        'action'     => 'index',
+                    ]
+                );
+            }
+            $this->flash->error(
+                'Неправильный пароль или Email адрес'
+            );
+        }
+        #Пользователь не смог пройти авторизацию, выводим ему эту же страницу
+        return $this->dispatcher->forward(
+            [
+                'controller' => 'index',
+                'action'     => 'index',
+            ]
+        );
     }
-
-
-    }
-
 }
+
+
+
 
