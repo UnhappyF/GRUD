@@ -1,8 +1,10 @@
 <?php
 declare(strict_types=1);
 use Phalcon\Mvc\Model\Criteria;
+
 use Phalcon\Mvc\Model\Query;
 use Phalcon\Paginator\Adapter\QueryBuilder as Paginator;
+
 
 class PhonebookController extends ControllerBase
 {
@@ -17,6 +19,7 @@ class PhonebookController extends ControllerBase
 
 		
 		$currentPage = (int) isset($_GET['page']) ? $_GET['page']:1;
+
 		
 	
 		
@@ -39,10 +42,13 @@ class PhonebookController extends ControllerBase
 		
 	
 
+
 		
 		$paginator = new Paginator(
 			array(
+
 				"builder" => $ppls,
+
 				"limit" => 5, // Количество записей на страницу
 				"page" => $currentPage // Активная страница
 			)
@@ -52,7 +58,7 @@ class PhonebookController extends ControllerBase
 		
 		
 		
-	
+
 		$this->view->page = $page;
 	}
 
