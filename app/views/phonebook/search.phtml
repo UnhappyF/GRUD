@@ -1,27 +1,54 @@
+<style>
+   .accordion {
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  padding: 18px;
+  width: 50%;
+  text-align: center;
+  border: none;
+  outline: none;
+  transition: 0.4s;
+}
 
-<table>
-<thead>
-<tr>
-<th>Id</th>
-<th>Имя</th>
-<th>Телефон</th>
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+.active, .accordion:hover {
+  background-color: #ccc;
+}
 
-</tr>
-</thead>
-<tbody>
+/* Style the accordion panel. Note: hidden by default */
+.panel {
+  padding: 0 18px;
+  background-color: white;
+  display: none;
+  overflow: hidden;
+}
+  </style>
+  
+  
+
+
 
 <?php
 
 	foreach($page->GetItems() as $people){
+	echo '<button class="accordion">'.$people->getPeople()->name.' ';
 	
+	echo $people->phoneNumber.'</button>';
 	
+
 	echo '
-	<tr>
-	<td>'.$people->idPeople.' </td>
-	<td>'.$people->getPeople()->name.' </td>
-	<td>'.$people->phoneNumber.' </td>
-	<td>'.$this->tag->linkTo("phonebook/delete/".$people->idPeople, "Удалить").'</td>
-	</tr>';
+		<div class="panel">
+		<p>'.$people->getPeople()->name.'<br>
+		'.$people->getPeople()->secondName.'<br>
+		'.$people->getPeople()->patronomic.'<br>
+		'.$people->getPeople()->mail.'<br>
+		'.$people->getPeople()->organizationName.'<br>
+		'.$people->getPeople()->city.' '.$people->getPeople()->street.' '.$people->getPeople()->house.' '.$people->getPeople()->apNumber.'<br>';
+		echo $this->tag->linkTo("phonebook/delete/".$people->phoneNumber, "Удалить").'
+		</p>
+		
+		</div>';
 	}
 
 	echo '
@@ -44,3 +71,24 @@
 
 
 ?>
+
+<script>
+var acc = document.getElementsByClassName("accordion");
+var i;
+
+for (i = 0; i < acc.length; i++) {
+  acc[i].addEventListener("click", function() {
+    /* Toggle between adding and removing the "active" class,
+    to highlight the button that controls the panel */
+    this.classList.toggle("active");
+
+    /* Toggle between hiding and showing the active panel */
+    var panel = this.nextElementSibling;
+    if (panel.style.display === "block") {
+      panel.style.display = "none";
+    } else {
+      panel.style.display = "block";
+    }
+  });
+}
+</script>
