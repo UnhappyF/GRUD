@@ -69,7 +69,21 @@ class PhonebookController extends ControllerBase
 
 	public function deleteAction($id)
 	{
+		$people = People::find('id = '.$id);
 
+		if ($people !== false) {
+			if ($people->delete() === false) {
+				echo "К сожалению, мы не можем удалить контакт прямо сейчас: \n";
+
+				$messages = $people->getMessages();
+
+				foreach ($messages as $message) {
+					echo $message, "\n";
+				}
+			} else {
+				echo 'Контакт был успешно удален!';
+			}
+		}
 	}
 }
 
