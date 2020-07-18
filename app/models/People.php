@@ -22,6 +22,13 @@ public $apNumber;
 public function initialize()
 {
     $this->setConnectionService('dbPhonebook');
+	
+	$this->hasMany(
+            'id',
+            'phoneNumber',
+            'idPeople',
+			['alias' => 'Phonenumber']
+        );
 }
 
 }
