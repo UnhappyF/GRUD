@@ -10,10 +10,18 @@ public $idPeople;
 public $idTypePhoneNumber;
 
 
-public function initialize()
-{
-    $this->setConnectionService('dbPhonebook');
-}
+	public function initialize()
+	{
+		$this->setConnectionService('dbPhonebook');
+		
+		$this->belongsTo(
+            'idPeople',
+            'People',
+            'id',
+			['alias' => 'People']
+        );
+	}
 
+	
 }
 ?>

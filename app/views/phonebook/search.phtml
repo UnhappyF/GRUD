@@ -12,32 +12,35 @@
 
 <?php
 
-foreach($page->GetItems() as $people){
-echo '
-<tr>
-<td>'.$people["id"].' </td>
-<td>'.$people["name"].' </td>
-<td>'.$this->tag->linkTo("phonebook/delete/".$people["id"], "Удалить").'</td>
-</tr>';
-}
+	foreach($page->GetItems() as $people){
+	
+	
+	echo '
+	<tr>
+	<td>'.$people->idPeople.' </td>
+	<td>'.$people->getPeople()->name.' </td>
+	<td>'.$people->phoneNumber.' </td>
+	<td>'.$this->tag->linkTo("phonebook/delete/".$people->idPeople, "Удалить").'</td>
+	</tr>';
+	}
 
-echo '
-</tbody>
-<tbody>
-<tr>
-<td colspan="7">
-<div>';
-echo $this->tag->linkTo("phonebook/search", "Первая");
-echo $this->tag->linkTo("phonebook/search?page=".$page->previous, "Предыдущая");
-echo $this->tag->linkTo("phonebook/search?page=".$page->next, "Следующая");
-echo $this->tag->linkTo("phonebook/search?page=".$page->last, "Последняя");
+	echo '
+	</tbody>
+	<tbody>
+	<tr>
+	<td colspan="7">
+	<div>';
+	echo $this->tag->linkTo("phonebook/search", "Первая");
+	echo $this->tag->linkTo("phonebook/search?page=".$page->previous, "Предыдущая");
+	echo $this->tag->linkTo("phonebook/search?page=".$page->next, "Следующая");
+	echo $this->tag->linkTo("phonebook/search?page=".$page->last, "Последняя");
 
-echo '<span class="help-inline">'.$page->current.' из'. $page->last .'</span>
-</div>
-</td>
-</tr>
-</tbody>
-</table>';
+	echo '<span class="help-inline">'.$page->current.' из'. $page->last .'</span>
+	</div>
+	</td>
+	</tr>
+	</tbody>
+	</table>';
 
 
 ?>

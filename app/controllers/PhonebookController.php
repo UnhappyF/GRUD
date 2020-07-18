@@ -1,8 +1,8 @@
 <?php
 declare(strict_types=1);
 use Phalcon\Mvc\Model\Criteria;
-
-use Phalcon\Paginator\Adapter\NativeArray as Paginator;
+use Phalcon\Mvc\Model\Query;
+use Phalcon\Paginator\Adapter\QueryBuilder as Paginator;
 
 class PhonebookController extends ControllerBase
 {
@@ -17,23 +17,52 @@ class PhonebookController extends ControllerBase
 
 		
 		$currentPage = (int) isset($_GET['page']) ? $_GET['page']:1;
-	if ($this->request->isPost()) {
-		$query = Criteria::fromInput($this->di, "People", $this->request->getPost());
+		
+	
 		
 		
 		
-		$people = People::find($query->getParams());
-		$this->persistent->searchPeople = $people;
+		/*
+		$query = Criteria::fromInput($this->di, "Phonenumber", $this->request->getPost());
+		$query->join("People", "People.id = Phonenumber.idPeople", "r");
+		$this->view->tmp = Phonenumber::find($query->getParams());
+		
+		$Phonenumber = Phonenumber::find($query->getParams());
+		$this->persistent->searchPeople = $Phonenumber;
 
+		*/
 		
+		$ppls = $this->modelsManager->createBuilder();
+		$ppls->from('Phonenumber');
+		$ppls->join('People');
+		$ppls->orderBy('People.name');
+		$ppls->getQuery();
 		
-		
-		} 
+	
+		/*$tmpAr = $this->persistent->searchPeople->toArray();
+		$i=0;
+		foreach($tmpAr as $phone){
+			$j=0;
+			foreach($this->persistent->searchPeople as $ppl){
+			
+				if($i==$j)
+					$phone += $ppl->getPeople()->toArray();
+				
+				$j++;
+			
+			
+			}
+			
+			$aa[$i] = $phone;
+			$i++;
+			
+		}
+		*/
 
 		
 		$paginator = new Paginator(
 			array(
-				"data" => $this->persistent->searchPeople->toArray(),
+				"builder" => $ppls,
 				"limit" => 5, // Количество записей на страницу
 				"page" => $currentPage // Активная страница
 			)
@@ -43,7 +72,7 @@ class PhonebookController extends ControllerBase
 		
 		
 		
-		
+	
 		$this->view->page = $page;
 	}
 
