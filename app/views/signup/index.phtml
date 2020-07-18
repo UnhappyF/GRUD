@@ -31,6 +31,15 @@
     	  	<div class="col-md-4" style="background-color: silver">
     		  <label for="password">Пароль</label>
     		  <input type="password" class="form-control" id="password" placeholder="Введите пароль" name="password">
+
+
+              </div>
+            </div>
+            <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4" style="background-color: silver">
+              <label for="confirmPassword">Повторите пароль</label>
+              <input type="Password" class="form-control" id="confirmPassword" placeholder="Повторите пароль" name="confirmPassword">
     		  
     		  <br>
     		  <?php echo $this->tag->submitButton(["Регистрация", 'class' => 'btn btn-success  btn-block']); ?>

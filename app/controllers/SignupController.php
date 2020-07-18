@@ -65,6 +65,17 @@ class SignupController extends Controller
             ]
         );
 		}
+		elseif($this->request->getPost()['password']!=$this->request->getPost()['confirmPassword']){
+			$this->flash->error(
+            'Подтверждение не совпадает с паролем'
+            );
+            return $this->dispatcher->forward(
+            [
+                'controller' => 'signup',
+                'action'     => 'index',
+            ]
+        );
+		}
 		else{
 		$user->name = $this->request->getPost()['name'];
 		$user->email = $this->request->getPost()['email'];
