@@ -78,7 +78,7 @@ class PhonebookController extends ControllerBase
 
 	public function deleteAction($number)
 	{
-		$Phone = Phonenumber::find('phoneNumber = '.$number);
+		$Phone = Phonenumber::find('phoneNumber = \''.$number.'\'');
 
 		if ($Phone !== false) {
 			if ($Phone->delete() === false) {
