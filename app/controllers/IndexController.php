@@ -23,7 +23,6 @@ class IndexController extends ControllerBase
 
     public function signinAction()
     {
-         echo "WELCOME";
         if($this->request->isPost()){
             $user = User::findFirst(
             [
@@ -35,7 +34,6 @@ class IndexController extends ControllerBase
         );
         if ($user !== null && password_verify($this->request->getPost()['password'], $user->password)) {
             $this->_registerSession($user);
-
             $this->flash->success(
             'Добро пожаловать ' . $user->name
             );

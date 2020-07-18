@@ -33,10 +33,37 @@ class SignupController extends Controller
             ]
 		);
 		if($nameFind->count()!=0){
-			echo "Данный никнейм занят, введите другой";
+			$this->flash->error(
+            'Данный никнейм занят, введите другой'
+            );
+            return $this->dispatcher->forward(
+            [
+                'controller' => 'signup',
+                'action'     => 'index',
+            ]
+        );
 		}
 		elseif ($mailFind->count()!=0){
-			echo "Данная почта уже зарегестрирована";
+			$this->flash->error(
+            'Данная почта уже зарегестрирована'
+            );
+            return $this->dispatcher->forward(
+            [
+                'controller' => 'signup',
+                'action'     => 'index',
+            ]
+        );
+        }
+        elseif ($this->request->getPost()['password']==null){
+        	$this->flash->error(
+            'Введите пароль'
+            );
+             return $this->dispatcher->forward(
+            [
+                'controller' => 'signup',
+                'action'     => 'index',
+            ]
+        );
 		}
 		else{
 		$user->name = $this->request->getPost()['name'];
@@ -46,12 +73,25 @@ class SignupController extends Controller
 	          }  
 		#$success = $user->save($this->request->getPost(), array('name', 'email','password'));
 		if ($success) {
-			echo "Регистрация прошла успешно!";
+			$this->flash->success(
+            'Акаунт создан.Для дальнейшей работы войдите в акаунт'
+            );
+            return $this->dispatcher->forward(
+            [
+                'controller' => 'index',
+                'action'     => 'index',
+            ]
+        );
 		} else {
-			echo "Ошибка: <br/>";
-			foreach ($user->getMessages() as $message) {
-				echo $message->getMessage(), "<br/>";
-			}
+			$this->flash->error(
+            'Введите данные для регистрации'
+            );
+            return $this->dispatcher->forward(
+            [
+                'controller' => 'signup',
+                'action'     => 'index',
+            ]
+        );	
 		}
 		$this->view->disable();
     }
