@@ -15,9 +15,9 @@
 foreach($page->GetItems() as $people){
 echo '
 <tr>
-<td>'.$people["name"].' </td>
 <td>'.$people["id"].' </td>
-
+<td>'.$people["name"].' </td>
+<td>'.$this->tag->linkTo("phonebook/delete/".$people["id"], "Удалить").'</td>
 </tr>';
 }
 
