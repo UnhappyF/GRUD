@@ -76,21 +76,21 @@ class PhonebookController extends ControllerBase
 			//save from edit form
 	}
 
-	public function deleteAction($id)
+	public function deleteAction($number)
 	{
-		$people = People::find('id = '.$id);
+		$Phone = Phonenumber::find('phoneNumber = '.$number);
 
-		if ($people !== false) {
-			if ($people->delete() === false) {
-				echo "К сожалению, мы не можем удалить контакт прямо сейчас: \n";
+		if ($Phone !== false) {
+			if ($Phone->delete() === false) {
+				echo "К сожалению, мы не можем удалить телефон прямо сейчас: \n";
 
-				$messages = $people->getMessages();
+				$messages = $Phone->getMessages();
 
 				foreach ($messages as $message) {
 					echo $message, "\n";
 				}
 			} else {
-				echo 'Контакт был успешно удален!';
+				echo 'Телефон был успешно удален!';
 			}
 		}
 	}
