@@ -21,43 +21,23 @@ class PhonebookController extends ControllerBase
 	
 		
 		
-		
-		/*
-		$query = Criteria::fromInput($this->di, "Phonenumber", $this->request->getPost());
-		$query->join("People", "People.id = Phonenumber.idPeople", "r");
-		$this->view->tmp = Phonenumber::find($query->getParams());
-		
-		$Phonenumber = Phonenumber::find($query->getParams());
-		$this->persistent->searchPeople = $Phonenumber;
-
-		*/
-		
 		$ppls = $this->modelsManager->createBuilder();
 		$ppls->from('Phonenumber');
+		$ppls->where('People.name LIKE \''.$this->request->getPost()['name'].'%\'');
+		$ppls->andWhere('Phonenumber.phoneNumber LIKE \''.$this->request->getPost()['phone'].'%\'');
+		$ppls->andWhere('People.secondName LIKE \''.$this->request->getPost()['lastName'].'%\'');
+		$ppls->andWhere('People.patronomic LIKE \''.$this->request->getPost()['fatherName'].'%\'');
+		$ppls->andWhere('People.mail LIKE \''.$this->request->getPost()['email'].'%\'');
+		$ppls->andWhere('People.organizationName LIKE \''.$this->request->getPost()['orgName'].'%\'');
+		$ppls->andWhere('People.city LIKE \''.$this->request->getPost()['city'].'%\'');
+		$ppls->andWhere('People.street LIKE \''.$this->request->getPost()['street'].'%\'');
+		$ppls->andWhere('People.house LIKE \''.$this->request->getPost()['house'].'%\'');
+		$ppls->andWhere('People.apNumber LIKE \''.$this->request->getPost()['ap'].'%\'');
+		#$ppls->andWhere('People.note LIKE \''.$this->request->getPost()['note'].'%\'');
 		$ppls->join('People');
-		$ppls->orderBy('People.name');
 		$ppls->getQuery();
 		
 	
-		/*$tmpAr = $this->persistent->searchPeople->toArray();
-		$i=0;
-		foreach($tmpAr as $phone){
-			$j=0;
-			foreach($this->persistent->searchPeople as $ppl){
-			
-				if($i==$j)
-					$phone += $ppl->getPeople()->toArray();
-				
-				$j++;
-			
-			
-			}
-			
-			$aa[$i] = $phone;
-			$i++;
-			
-		}
-		*/
 
 		
 		$paginator = new Paginator(

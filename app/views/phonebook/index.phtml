@@ -1,11 +1,9 @@
 <body>
-	<br>
-	<br>
-	<br>
+	
 	<div class="container-fluid">
     <?php echo $this->tag->form("phonebook/search"); ?>
     <br>
-	<br>
+	
     	  <div class="form-group">
     	  	<div class="row">
     	  	<div class="col-md-4"></div>
@@ -20,11 +18,91 @@
     	  	<div class="col-md-4"></div>
     	  	<div class="col-md-4" style="background-color: silver">
     		  <label for="phone">Телефон</label>
-    		  <input type="text" class="form-control" id="phone" placeholder="Введите телефон"  name="phoneNumber">
+    		  <input type="text" class="form-control" id="phone" placeholder="Введите телефон"  name="phone">
     		  
     		
-			
+			</div>
+    	  </div>
     		  
+			  
+			  <div class="row">
+    	  	<div class="col-md-4"></div>
+    	  	<div class="col-md-4" style="background-color: silver">
+    		  <label for="lastName">Фамилия</label>
+    		  <input type="text" class="form-control" id="lastName" placeholder="Введите фамилию"  name="lastName">
+    		  
+    		
+			</div>
+			</div>
+			
+			<div class="row">
+    	  	<div class="col-md-4"></div>
+    	  	<div class="col-md-4" style="background-color: silver">
+    		  <label for="fatherName">Отчество</label>
+    		  <input type="text" class="form-control" id="fatherName" placeholder="Введите отчество"  name="fatherName">
+    		  
+    		
+			</div>
+			</div>
+			
+	
+			<div class="row">
+    	  	<div class="col-md-4"></div>
+    	  	<div class="col-md-4" style="background-color: silver">
+    		  <label for="email">Email адрес</label>
+    		  <input type="text" class="form-control" id="email" placeholder="Введите email"  name="email">
+    		  
+    		
+			</div>
+			</div>
+			
+			<div class="row">
+    	  	<div class="col-md-4"></div>
+    	  	<div class="col-md-4" style="background-color: silver">
+    		  <label for="note">Заметка</label>
+    		  <input type="text" class="form-control" id="note" placeholder="Введите заметку"  name="note">
+    		  
+    		
+			</div>
+			</div>
+			
+			
+			<div class="row">
+    	  	<div class="col-md-4"></div>
+    	  	<div class="col-md-4" style="background-color: silver">
+    		  <label for="orgName">Название организации</label>
+    		  <input type="text" class="form-control" id="orgName" placeholder="Введите название организации"  name="orgName">
+    		  
+    		
+			</div>
+			</div>
+			<div class="row">
+    	  	<div class="col-md-4"></div>
+    	  	<div class="col-md-4" style="background-color: silver">
+    		  <label for="address">Адрес</label>
+    		  <input type="text" class="form-control" id="city" placeholder="Введите город"  name="city">
+			  <input type="text" class="form-control" id="street" placeholder="Введите улицу"  name="street">
+			  <input type="text" class="form-control" id="house" placeholder="Дом"  name="house">
+			  <input type="text" class="form-control" id="ap" placeholder="Кв"  name="ap">
+    		  
+    		
+			</div>
+			</div>
+			
+			<div class="row">
+    	  	<div class="col-md-4"></div>
+    	  	<div class="col-md-4" style="background-color: silver">
+    		  
+    		  <p><input type="checkbox" name="important" value="1"> Важный контакт</p>	
+    		  
+    		 
+    	    </div>
+    	  </div>
+			  
+			  
+			  	<div class="row">
+    	  	<div class="col-md-4"></div>
+    	  	<div class="col-md-4" style="background-color: silver">
     		  <br>
     		  <?php echo $this->tag->submitButton(["Поиск", 'class' => 'btn btn-success  btn-block']); ?>
     		  </form>
