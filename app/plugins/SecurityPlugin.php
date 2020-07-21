@@ -34,7 +34,6 @@ class SecurityPlugin extends Injectable
             $this->flash->error(
                 "Ввойдите в акаунт для работы с сайтом"
             );
-
             $containerspatcher->forward(
                 [
                     'controller' => 'index',
@@ -60,7 +59,9 @@ class SecurityPlugin extends Injectable
          $acl->addRole($role); 
      }
      $privateResources = array(
-      'phonebook' => array('index', 'search'), 
+      'phonebook' => array('index', 'search'),
+      'myspace' => array('index', 'exit'),
+      'changepass'=> array('index', 'exit', 'change', 'myspace'),
      );
      foreach ($privateResources as $componentName => $actions) {
     $acl->addComponent(

@@ -38,12 +38,7 @@ class IndexController extends ControllerBase
             'Добро пожаловать ' . $user->name
             );
             #Если юзер прошел авторизацию, то пропускаем его к контактам
-            return $this->dispatcher->forward(
-                    [
-                        'controller' => 'phonebook',
-                        'action'     => 'index',
-                    ]
-                );
+            header("Location: /myspace");
             }
             $this->flash->error(
                 'Неправильный пароль или Email адрес'
