@@ -12,6 +12,7 @@ public $name;
 public function initialize()
 {
     $this->setConnectionService('dbPhonebook');
+
 	
 	$this->hasManyToMany(
             'id',
@@ -21,6 +22,7 @@ public function initialize()
             'id',
 			['alias' => 'Peopls']
         );
+
 }
 
 }

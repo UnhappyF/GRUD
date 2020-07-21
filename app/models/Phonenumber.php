@@ -4,11 +4,14 @@ use Phalcon\Mvc\Model;
 
 class Phonenumber extends Model{
 	
+
 public $id;
+
 public $phoneNumber;
 public $idOperator;
 public $idPeople;
 public $idTypePhoneNumber;
+
 
 
 	public function initialize()
@@ -29,6 +32,5 @@ public $idTypePhoneNumber;
         );
 	}
 
-	
 }
 ?>

@@ -2,8 +2,10 @@
 declare(strict_types=1);
 use Phalcon\Mvc\Model\Criteria;
 
+
 use Phalcon\Mvc\Model\Query;
 use Phalcon\Paginator\Adapter\QueryBuilder as Paginator;
+
 
 
 class PhonebookController extends ControllerBase
@@ -11,11 +13,13 @@ class PhonebookController extends ControllerBase
 
     public function indexAction()
     {
+
 		$types = Typephonenumber::find();
 		$this->view->types = $types;
 		
 		$groups = Group::find();
 		$this->view->groups = $groups;
+
     }
   
 	public function searchAction()
@@ -23,6 +27,7 @@ class PhonebookController extends ControllerBase
 
 		
 		$currentPage = (int) isset($_GET['page']) ? $_GET['page']:1;
+
 
 		if($this->request->isPost()){
 			$this->persistent->searchParams = $this->request->getPost();
@@ -52,12 +57,11 @@ class PhonebookController extends ControllerBase
 	
 
 
+
 		
 		$paginator = new Paginator(
 			array(
-
 				"builder" => $ppls,
-
 				"limit" => 5, // Количество записей на страницу
 				"page" => $currentPage // Активная страница
 			)
@@ -68,6 +72,7 @@ class PhonebookController extends ControllerBase
 		
 		
 
+
 		$this->view->page = $page;
 		
 		$types = Typephonenumber::find();
@@ -75,10 +80,12 @@ class PhonebookController extends ControllerBase
 		
 		$groups = Group::find();
 		$this->view->groups = $groups;
+
 	}
 
 	public function newAction()
 	{
+
 		$types = Typephonenumber::find();
 		$this->view->types = $types;
 		
@@ -154,10 +161,15 @@ class PhonebookController extends ControllerBase
 					echo $message->getMessage(), "<br/>";
 				}
 			}
+
+	}
+
+	
 	}
 
 	public function createAction()
 	{
+
 			
 	$people = new people();
 		
@@ -240,12 +252,14 @@ class PhonebookController extends ControllerBase
 				echo $message->getMessage(), "<br/>";
 			}
 		}
+
 	}
 
 	public function saveAction()
 	{
 			//save from edit form
 	}
+
 
 	public function deleteAction($number)
 	{
@@ -265,6 +279,7 @@ class PhonebookController extends ControllerBase
 				echo 'Телефон был успешно удален!';
 			}
 		}
+
 	}
 }
 
