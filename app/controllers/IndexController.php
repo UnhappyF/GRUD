@@ -26,7 +26,7 @@ class IndexController extends ControllerBase
         if($this->request->isPost()){
             $user = User::findFirst(
             [
-                'email=:mail:',
+                'email=:mail: OR name=:mail:',
                 'bind'=>[
                     'mail'=>$mail=$this->request->getPost('email'),
                 ],
