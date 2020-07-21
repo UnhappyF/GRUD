@@ -8,12 +8,20 @@ defined('BASE_PATH') || define('BASE_PATH', getenv('BASE_PATH') ?: realpath(dirn
 defined('APP_PATH') || define('APP_PATH', BASE_PATH . '/app');
 
 return new \Phalcon\Config([
-    'database' => [
+    'databaseUsers' => [
         'adapter'     => 'Mysql',
         'host'        => 'localhost',
         'username'    => 'root',
         'password'    => 'root',
         'dbname'      => 'prakt',
+        'charset'     => 'utf8',
+    ],
+	'databasePhonebook' => [
+        'adapter'     => 'Mysql',
+        'host'        => 'localhost',
+        'username'    => 'root',
+        'password'    => '1234',
+        'dbname'      => 'phonebook',
         'charset'     => 'utf8',
     ],
     'application' => [

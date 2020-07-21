@@ -50,14 +50,39 @@
     	  	<div class="col-md-4" style="background-color: silver">
     		  <label for="typePhone">Тип номера</label>
 				<select name = "typeNumber">
-				<option value="1">Личный</option>
-				<option value="2">Рабочий</option>
+
+				<?php 
+				foreach($types as $type){
+					echo '<option value="'.$type->id.'">'.$type->name.'</option>';
+				}
+				?>
 				</select>
     		  
     		
 			</div>
 			</div>
 			
+
+			
+			<div class="row">
+    	  	<div class="col-md-4"></div>
+    	  	<div class="col-md-4" style="background-color: silver">
+    		  <label for="groups">Группы</label>
+				<select name = "groups[]" multiple>
+				<?php 
+				foreach($groups as $group){
+					echo '<option value="'.$group->id.'">'.$group->name.'</option>';
+				}
+				?>
+				</select>
+    		  
+    		
+			</div>
+			</div>
+			
+			
+			
+
 			<div class="row">
     	  	<div class="col-md-4"></div>
     	  	<div class="col-md-4" style="background-color: silver">
@@ -78,6 +103,18 @@
 			</div>
 			</div>
 			
+
+			<div class="row">
+    	  	<div class="col-md-4"></div>
+    	  	<div class="col-md-4" style="background-color: silver">
+    		  <label for="birth">День рождения</label>
+    		  <input type="date" class="form-control" id="birth" placeholder="Введите дату рождения"  name="birth">
+    		  
+    		
+			</div>
+			</div>
+			
+
 			
 			<div class="row">
     	  	<div class="col-md-4"></div>
