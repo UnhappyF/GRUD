@@ -36,18 +36,18 @@ class PhonebookController extends ControllerBase
 		
 		$ppls = $this->modelsManager->createBuilder();
 		$ppls->from('Phonenumber');
-		$ppls->where('People.name LIKE \''.$this->persistent->searchParams['name'].'%\'');
-		$ppls->andWhere('Phonenumber.phoneNumber LIKE \''.$this->persistent->searchParams['phone'].'%\'');
-		$ppls->andWhere('People.secondName LIKE \''.$this->persistent->searchParams['lastName'].'%\'');
-		$ppls->andWhere('People.patronomic LIKE \''.$this->persistent->searchParams['fatherName'].'%\'');
-		$ppls->andWhere('People.mail LIKE \''.$this->persistent->searchParams['email'].'%\'');
-		$ppls->andWhere('People.organizationName LIKE \''.$this->persistent->searchParams['orgName'].'%\'');
-		$ppls->andWhere('People.city LIKE \''.$this->persistent->searchParams['city'].'%\'');
-		$ppls->andWhere('People.street LIKE \''.$this->persistent->searchParams['street'].'%\'');
-		$ppls->andWhere('People.house LIKE \''.$this->persistent->searchParams['house'].'%\'');
-		$ppls->andWhere('People.apNumber LIKE \''.$this->persistent->searchParams['ap'].'%\'');
-		$ppls->andWhere('People.chosen LIKE \''.$this->persistent->searchParams['important'].'%\'');
-		if($this->persistent->searchParams['typeNumber']!=0)$ppls->andWhere('Phonenumber.idTypePhoneNumber LIKE \''.$this->persistent->searchParams['typeNumber'].'%\'');
+		$ppls->where('People.name LIKE :name:', ['name' => $this->persistent->searchParams['name'].'%']);
+		$ppls->andWhere('Phonenumber.phoneNumber LIKE :phone:', ['phone' => $this->persistent->searchParams['phone'].'%']);
+		$ppls->andWhere('People.secondName LIKE :lastName:', ['lastName' => $this->persistent->searchParams['lastName'].'%']);
+		$ppls->andWhere('People.patronomic LIKE :fatherName:', ['fatherName' => $this->persistent->searchParams['fatherName'].'%']);
+		$ppls->andWhere('People.mail LIKE :email:', ['email' => $this->persistent->searchParams['email'].'%']);
+		$ppls->andWhere('People.organizationName LIKE :orgName:', ['orgName' => $this->persistent->searchParams['orgName'].'%']);
+		$ppls->andWhere('People.city LIKE :city:', ['city' => $this->persistent->searchParams['city'].'%']);
+		$ppls->andWhere('People.street LIKE :street:', ['street' => $this->persistent->searchParams['street'].'%']);
+		$ppls->andWhere('People.house LIKE :house:', ['house' => $this->persistent->searchParams['house'].'%']);
+		$ppls->andWhere('People.apNumber LIKE :ap:', ['ap' => $this->persistent->searchParams['ap'].'%']);
+		$ppls->andWhere('People.chosen LIKE :important:', ['important' => $this->persistent->searchParams['important'].'%']);
+		if($this->persistent->searchParams['typeNumber']!=0)$ppls->andWhere('Phonenumber.idTypePhoneNumber LIKE :typeNumber:', ['typeNumber' => $this->persistent->searchParams['typeNumber'].'%']);
 		
 		if (!empty($this->request->getPost()['birth']))$ppls->andWhere('People.birth LIKE \''.$this->persistent->searchParams['birth'].'%\'');
 		
@@ -167,7 +167,7 @@ class PhonebookController extends ControllerBase
 	}
 
 	
-	}
+	
 
 	public function createAction()
 	{
