@@ -4,6 +4,7 @@ use Phalcon\Mvc\Model;
 
 class Phonenumber extends Model{
 	
+public $id;
 public $phoneNumber;
 public $idOperator;
 public $idPeople;
@@ -19,6 +20,12 @@ public $idTypePhoneNumber;
             'People',
             'id',
 			['alias' => 'People']
+        );
+		$this->belongsTo(
+            'idTypePhoneNumber',
+            'Typephonenumber',
+            'id',
+			['alias' => 'TypeNumber']
         );
 	}
 
