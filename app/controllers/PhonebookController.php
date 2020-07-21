@@ -24,24 +24,26 @@ class PhonebookController extends ControllerBase
 		
 		$currentPage = (int) isset($_GET['page']) ? $_GET['page']:1;
 
-		
-	
+		if($this->request->isPost()){
+			$this->persistent->searchParams = $this->request->getPost();
+		}
 		
 		
 		$ppls = $this->modelsManager->createBuilder();
 		$ppls->from('Phonenumber');
-		$ppls->where('People.name LIKE \''.$this->request->getPost()['name'].'%\'');
-		$ppls->andWhere('Phonenumber.phoneNumber LIKE \''.$this->request->getPost()['phone'].'%\'');
-		$ppls->andWhere('People.secondName LIKE \''.$this->request->getPost()['lastName'].'%\'');
-		$ppls->andWhere('People.patronomic LIKE \''.$this->request->getPost()['fatherName'].'%\'');
-		$ppls->andWhere('People.mail LIKE \''.$this->request->getPost()['email'].'%\'');
-		$ppls->andWhere('People.organizationName LIKE \''.$this->request->getPost()['orgName'].'%\'');
-		$ppls->andWhere('People.city LIKE \''.$this->request->getPost()['city'].'%\'');
-		$ppls->andWhere('People.street LIKE \''.$this->request->getPost()['street'].'%\'');
-		$ppls->andWhere('People.house LIKE \''.$this->request->getPost()['house'].'%\'');
-		$ppls->andWhere('People.apNumber LIKE \''.$this->request->getPost()['ap'].'%\'');
-		$ppls->andWhere('People.chosen LIKE \''.$this->request->getPost()['important'].'%\'');
-		
+		$ppls->where('People.name LIKE \''.$this->persistent->searchParams['name'].'%\'');
+		$ppls->andWhere('Phonenumber.phoneNumber LIKE \''.$this->persistent->searchParams['phone'].'%\'');
+		$ppls->andWhere('People.secondName LIKE \''.$this->persistent->searchParams['lastName'].'%\'');
+		$ppls->andWhere('People.patronomic LIKE \''.$this->persistent->searchParams['fatherName'].'%\'');
+		$ppls->andWhere('People.mail LIKE \''.$this->persistent->searchParams['email'].'%\'');
+		$ppls->andWhere('People.organizationName LIKE \''.$this->persistent->searchParams['orgName'].'%\'');
+		$ppls->andWhere('People.city LIKE \''.$this->persistent->searchParams['city'].'%\'');
+		$ppls->andWhere('People.street LIKE \''.$this->persistent->searchParams['street'].'%\'');
+		$ppls->andWhere('People.house LIKE \''.$this->persistent->searchParams['house'].'%\'');
+		$ppls->andWhere('People.apNumber LIKE \''.$this->persistent->searchParams['ap'].'%\'');
+		$ppls->andWhere('People.chosen LIKE \''.$this->persistent->searchParams['important'].'%\'');
+		$ppls->andWhere('Phonenumber.idTypePhoneNumber LIKE \''.$this->persistent->searchParams['typeNumber'].'%\'');
+		$ppls->andWhere('People.birth LIKE \''.$this->persistent->searchParams['birth'].'%\'');
 		#$ppls->andWhere('People.note LIKE \''.$this->request->getPost()['note'].'%\'');
 		$ppls->join('People');
 		$ppls->join('Group');
