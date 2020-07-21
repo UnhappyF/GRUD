@@ -42,11 +42,13 @@ class PhonebookController extends ControllerBase
 		$ppls->andWhere('People.house LIKE \''.$this->persistent->searchParams['house'].'%\'');
 		$ppls->andWhere('People.apNumber LIKE \''.$this->persistent->searchParams['ap'].'%\'');
 		$ppls->andWhere('People.chosen LIKE \''.$this->persistent->searchParams['important'].'%\'');
-		$ppls->andWhere('Phonenumber.idTypePhoneNumber LIKE \''.$this->persistent->searchParams['typeNumber'].'%\'');
-		$ppls->andWhere('People.birth LIKE \''.$this->persistent->searchParams['birth'].'%\'');
+		if($this->persistent->searchParams['typeNumber']!=0)$ppls->andWhere('Phonenumber.idTypePhoneNumber LIKE \''.$this->persistent->searchParams['typeNumber'].'%\'');
+		
+		if (!empty($this->request->getPost()['birth']))$ppls->andWhere('People.birth LIKE \''.$this->persistent->searchParams['birth'].'%\'');
+		
 		#$ppls->andWhere('People.note LIKE \''.$this->request->getPost()['note'].'%\'');
 		$ppls->join('People');
-		$ppls->join('Group');
+	
 		$ppls->getQuery();
 		
 	
