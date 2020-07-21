@@ -61,14 +61,101 @@ class PhonebookController extends ControllerBase
 			//for new contact form
 	}
 
-	public function editAction()
+	public function editAction($number)
 	{
-			//for edit form
+			
+			$phonenumber = Phonenumber::findFirst('phoneNumber = \''.$number.'\'');
+			
+			$people = People::findFirst('id = \''.$phonenumber->idPeople.'\'');
+			
+			$people->name = $this->request->getPost()['name'];
+			
+			$people->secondName = $this->request->getPost()['secondName'];
+			
+			$people->patronomic = $this->request->getPost()['fatherName'];
+			$people->mail = $this->request->getPost()['mail'];
+			
+			$people->organizationName = $this->request->getPost()['orgName'];
+			$people->city = $this->request->getPost()['city'];
+			$people->street = $this->request->getPost()['street'];
+			
+			$people->house = $this->request->getPost()['house'];
+			$people->apNumber = $this->request->getPost()['ap'];
+			$success = $people->save();
+		
+			
+			$phonenumber->phoneNumber = $this->request->getPost()['phone'];
+			
+			$success = $phonenumber->save();
+			if ($success) {
+				echo "Контакт обновлён!";
+				echo $this->tag->linkTo("phonebook/search", "Перейти к справочнику");
+				
+			}else {
+				echo "Ошибка: <br/>";
+				foreach ($phonenumber->getMessages() as $message) {
+					echo $message->getMessage(), "<br/>";
+				}
+			}
 	}
 
 	public function createAction()
 	{
-			//save from new form
+			
+	$people = new people();
+		
+		$people->name = $this->request->getPost()['name'];
+		$people->email = $this->request->getPost()['email'];
+		$people->secondName = $this->request->getPost()['lastName'];
+		
+		$people->patronomic = $this->request->getPost()['fatherName'];
+		$people->mail = $this->request->getPost()['email'];
+		$people->note = $this->request->getPost()['note'];
+	
+		$people->chosen = isset($this->request->getPost()['important'])       ? $this->request->getPost()['important'] : '0';
+		#$people->post = $this->request->getPost()['post'];
+		#$people->birth = $this->request->getPost()['birth'];
+		
+		$people->organizationName = $this->request->getPost()['orgName'];
+		$people->city = $this->request->getPost()['city'];
+		$people->street = $this->request->getPost()['street'];
+		
+		$people->house = $this->request->getPost()['house'];
+		$people->apNumber = $this->request->getPost()['ap'];
+	
+		
+		
+		$success = $people->save();
+		
+		
+		
+		
+		
+		if ($success) {
+			
+			$phonenumber = new phonenumber();
+	
+			$phonenumber->phoneNumber = $this->request->getPost()['phone'];
+			$phonenumber->idTypePhoneNumber = $this->request->getPost()['typeNumber'];
+			$phonenumber->idPeople = $people->id;
+			$phonenumber->idOperator = 1;
+			$success2 = $phonenumber->save();
+			if ($success2) {
+				echo "Контакт добавлен!";
+				echo $this->tag->linkTo("phonebook/search", "Перейти к справочнику");
+				echo $this->tag->linkTo("phonebook/new", "Добавить еще контакт");
+			}else {
+				echo "Ошибка: <br/>";
+				foreach ($phonenumber->getMessages() as $message) {
+					echo $message->getMessage(), "<br/>";
+				}
+			}
+		} else {
+			echo "Ошибка: <br/>";
+			foreach ($people->getMessages() as $message) {
+				echo $message->getMessage(), "<br/>";
+			}
+		}
 	}
 
 	public function saveAction()
@@ -90,6 +177,7 @@ class PhonebookController extends ControllerBase
 					echo $message, "\n";
 				}
 			} else {
+				echo $this->tag->linkTo("phonebook/search", "Перейти к справочнику");
 				echo 'Телефон был успешно удален!';
 			}
 		}

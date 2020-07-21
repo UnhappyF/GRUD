@@ -51,18 +51,18 @@ input[type=text] {
 	echo '
 		<div class="panel">
 		<p>';
-		echo $this->tag->form("phonebook/edit");
+		echo $this->tag->form("phonebook/edit/".$people->phoneNumber);
 		echo '
-		<input type="text" class="form-control" value='.$people->phoneNumber.' placeholder='.$people->phoneNumber.'  name="phone">
-		<input type="text" class="form-control" value='.$people->getPeople()->name.' placeholder='.$people->getPeople()->name.'  name="name">
-		<input type="text" class="form-control" value='.$people->getPeople()->secondName.' placeholder='.$people->getPeople()->secondName.'  name="secondName">
-		<input type="text" class="form-control" value='.$people->getPeople()->patronomic.' placeholder='.$people->getPeople()->patronomic.'  name="fatherName">
-		<input type="text" class="form-control" value='.$people->getPeople()->mail.' placeholder='.$people->getPeople()->mail.'  name="mail">
-		<input type="text" class="form-control" value='.$people->getPeople()->organizationName.' placeholder='.$people->getPeople()->organizationName.'  name="orgName">
-		<input type="text" class="form-control" id="address" value='.$people->getPeople()->city.' placeholder='.$people->getPeople()->city.'  name="city">
-		<input type="text" class="form-control" id="address" value='.$people->getPeople()->street.' placeholder='.$people->getPeople()->street.'  name="street">
-		<input type="text" class="form-control" id="address" value='.$people->getPeople()->house.' placeholder='.$people->getPeople()->house.'  name="house">
-		<input type="text" class="form-control" id="address" value='.$people->getPeople()->apNumber.' placeholder='.$people->getPeople()->apNumber.'  name="ap">
+		<input type="text" class="form-control" value=\''.$people->phoneNumber.'\' placeholder=\''.$people->phoneNumber.'\'  name="phone">
+		<input type="text" class="form-control" value=\''.$people->getPeople()->name.'\' placeholder=\''.$people->getPeople()->name.'\'  name="name">
+		<input type="text" class="form-control" value=\''.$people->getPeople()->secondName.'\' placeholder=\''.$people->getPeople()->secondName.'\'  name="secondName">
+		<input type="text" class="form-control" value=\''.$people->getPeople()->patronomic.'\' placeholder=\''.$people->getPeople()->patronomic.'\'  name="fatherName">
+		<input type="text" class="form-control" value=\''.$people->getPeople()->mail.'\' placeholder=\''.$people->getPeople()->mail.'\'  name="mail">
+		<input type="text" class="form-control" value=\''.$people->getPeople()->organizationName.'\' placeholder=\''.$people->getPeople()->organizationName.'\'  name="orgName">
+		<input type="text" class="form-control" id="address" value=\''.$people->getPeople()->city.'\' placeholder=\''.$people->getPeople()->city.'\'  name="city">
+		<input type="text" class="form-control" id="address" value=\''.$people->getPeople()->street.'\' placeholder=\''.$people->getPeople()->street.'\'  name="street">
+		<input type="text" class="form-control" id="address" value=\''.$people->getPeople()->house.'\' placeholder=\''.$people->getPeople()->house.'\'  name="house">
+		<input type="text" class="form-control" id="address" value=\''.$people->getPeople()->apNumber.'\' placeholder=\''.$people->getPeople()->apNumber.'\'  name="ap">
 		
 		
 		';
