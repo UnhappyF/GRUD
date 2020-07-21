@@ -33,6 +33,7 @@ class PhonebookController extends ControllerBase
 		$ppls->andWhere('People.street LIKE \''.$this->request->getPost()['street'].'%\'');
 		$ppls->andWhere('People.house LIKE \''.$this->request->getPost()['house'].'%\'');
 		$ppls->andWhere('People.apNumber LIKE \''.$this->request->getPost()['ap'].'%\'');
+		$ppls->andWhere('People.chosen LIKE \''.$this->request->getPost()['important'].'%\'');
 		#$ppls->andWhere('People.note LIKE \''.$this->request->getPost()['note'].'%\'');
 		$ppls->join('People');
 		$ppls->getQuery();
@@ -58,12 +59,17 @@ class PhonebookController extends ControllerBase
 		$types = Typephonenumber::find();
 		$this->view->types = $types;
 		
+		$groups = Group::find();
+		$this->view->groups = $groups;
 	}
 
 	public function newAction()
 	{
 		$types = Typephonenumber::find();
 		$this->view->types = $types;
+		
+		$groups = Group::find();
+		$this->view->groups = $groups;
 	}
 
 	public function editAction($number)
@@ -88,7 +94,36 @@ class PhonebookController extends ControllerBase
 			$people->apNumber = $this->request->getPost()['ap'];
 			$people->birth = empty($this->request->getPost()['birth']) ? NULL:$this->request->getPost()['birth'];
 			
+			
+			$people->peoplegroup->delete();
 			$success = $people->save();
+			if(isset($this->request->getPost()['groups'])){
+			
+			
+		
+			$group = new Group();
+			$group->name = 'Test';
+			$groups = Group::find([
+				'id IN ({letter:array})',
+				'bind' => [
+				'letter' => $this->request->getPost()['groups']
+				]
+			]);
+			
+			$modules = [];
+			foreach ($groups as $gr)
+				array_push($modules,$gr);
+			$people->groups = $modules;
+		
+		}
+			$success = $people->save();
+		
+		
+		
+		
+		
+			
+				
 		
 			
 			$phonenumber->phoneNumber = $this->request->getPost()['phone'];
@@ -121,7 +156,7 @@ class PhonebookController extends ControllerBase
 		$people->note = $this->request->getPost()['note'];
 	
 		$people->chosen = isset($this->request->getPost()['important'])       ? $this->request->getPost()['important'] : '0';
-		#$people->post = $this->request->getPost()['post'];
+		
 		
 		
 		$people->organizationName = $this->request->getPost()['orgName'];
@@ -131,11 +166,36 @@ class PhonebookController extends ControllerBase
 		$people->house = $this->request->getPost()['house'];
 		$people->apNumber = $this->request->getPost()['ap'];
 		
-		$people->birth = $this->request->getPost()['date'];
+		$people->birth = empty($this->request->getPost()['birth']) ? NULL:$this->request->getPost()['birth'];
+		
+		
+		if(isset($this->request->getPost()['groups'])){
+		$people->peoplegroup = $this->request->getPost()['groups'];
+		
 	
 		
 		
+		
+		
+			$group = new Group();
+			$group->name = 'Test';
+			$groups = Group::find([
+				'id IN ({letter:array})',
+				'bind' => [
+				'letter' => $this->request->getPost()['groups']
+				]
+			]);
+			
+			$modules = [];
+			foreach ($groups as $gr)
+				array_push($modules,$gr);
+			$people->groups = $modules;
+		
+		}
+		
 		$success = $people->save();
+		
+		
 		
 		
 		

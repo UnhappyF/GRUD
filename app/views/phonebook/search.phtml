@@ -54,7 +54,7 @@ input[type=date] {
 	
 	echo $people->phoneNumber.'</button>';
 	
-
+	
 	echo '
 		<div class="panel">
 		<p>';
@@ -85,6 +85,34 @@ input[type=date] {
 				}
 				echo '
 		</select>
+		
+		
+		
+		
+				<select name = "groups[]" multiple>
+				'; 
+				
+				foreach($groups as $group){
+					$a=$people->getPeople()->groups;
+					echo '<option value="'.$group->id.'"';
+					foreach($a as $b)
+						if($group->id == $b->id)
+							echo ' selected';
+						
+						
+					echo '>'.$group->name.'</option>';
+				}
+				echo '
+				
+				</select>
+    		  
+    		
+			
+		
+		
+		
+		
+		
 		
 		';
 		
