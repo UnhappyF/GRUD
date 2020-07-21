@@ -30,6 +30,13 @@ input[type=text] {
 	border-bottom: 2px solid grey;
  
 }
+input[type=date] {
+	
+	width: 50%;
+	border: none;
+	border-bottom: 2px solid grey;
+ 
+}
 #address {
 	display:inline-block;
     width: 12%; 
@@ -63,9 +70,24 @@ input[type=text] {
 		<input type="text" class="form-control" id="address" value=\''.$people->getPeople()->street.'\' placeholder=\''.$people->getPeople()->street.'\'  name="street">
 		<input type="text" class="form-control" id="address" value=\''.$people->getPeople()->house.'\' placeholder=\''.$people->getPeople()->house.'\'  name="house">
 		<input type="text" class="form-control" id="address" value=\''.$people->getPeople()->apNumber.'\' placeholder=\''.$people->getPeople()->apNumber.'\'  name="ap">
+		<input type="date" class="form-control" value=\''.$people->getPeople()->birth.'\' placeholder=\''.$people->getPeople()->birth.'\'  name="birth">
 		
+		
+		<select name = "typeNumber">
+				
+		'; 
+				foreach($types as $type){
+					if($type->id == $people->getTypeNumber()->id){
+					echo '<option value="'.$type->id.'" selected>'.$type->name.'</option>';
+					}else{
+						echo '<option value="'.$type->id.'">'.$type->name.'</option>';
+					}
+				}
+				echo '
+		</select>
 		
 		';
+		
 		echo $this->tag->submitButton("Изменить");
 		echo '</form>';
 		echo '<br>';

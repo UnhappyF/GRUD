@@ -54,11 +54,16 @@ class PhonebookController extends ControllerBase
 		
 	
 		$this->view->page = $page;
+		
+		$types = Typephonenumber::find();
+		$this->view->types = $types;
+		
 	}
 
 	public function newAction()
 	{
-			//for new contact form
+		$types = Typephonenumber::find();
+		$this->view->types = $types;
 	}
 
 	public function editAction($number)
@@ -81,10 +86,13 @@ class PhonebookController extends ControllerBase
 			
 			$people->house = $this->request->getPost()['house'];
 			$people->apNumber = $this->request->getPost()['ap'];
+			$people->birth = empty($this->request->getPost()['birth']) ? NULL:$this->request->getPost()['birth'];
+			
 			$success = $people->save();
 		
 			
 			$phonenumber->phoneNumber = $this->request->getPost()['phone'];
+			$phonenumber->idTypePhoneNumber = $this->request->getPost()['typeNumber'];
 			
 			$success = $phonenumber->save();
 			if ($success) {
@@ -114,7 +122,7 @@ class PhonebookController extends ControllerBase
 	
 		$people->chosen = isset($this->request->getPost()['important'])       ? $this->request->getPost()['important'] : '0';
 		#$people->post = $this->request->getPost()['post'];
-		#$people->birth = $this->request->getPost()['birth'];
+		
 		
 		$people->organizationName = $this->request->getPost()['orgName'];
 		$people->city = $this->request->getPost()['city'];
@@ -122,6 +130,8 @@ class PhonebookController extends ControllerBase
 		
 		$people->house = $this->request->getPost()['house'];
 		$people->apNumber = $this->request->getPost()['ap'];
+		
+		$people->birth = $this->request->getPost()['date'];
 	
 		
 		

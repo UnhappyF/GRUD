@@ -21,6 +21,12 @@ public $idTypePhoneNumber;
             'id',
 			['alias' => 'People']
         );
+		$this->belongsTo(
+            'idTypePhoneNumber',
+            'Typephonenumber',
+            'id',
+			['alias' => 'TypeNumber']
+        );
 	}
 
 	

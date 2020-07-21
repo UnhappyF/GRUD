@@ -50,8 +50,11 @@
     	  	<div class="col-md-4" style="background-color: silver">
     		  <label for="typePhone">Тип номера</label>
 				<select name = "typeNumber">
-				<option value="1">Личный</option>
-				<option value="2">Рабочий</option>
+				<?php 
+				foreach($types as $type){
+					echo '<option value="'.$type->id.'">'.$type->name.'</option>';
+				}
+				?>
 				</select>
     		  
     		
@@ -73,6 +76,16 @@
     	  	<div class="col-md-4" style="background-color: silver">
     		  <label for="note">Заметка</label>
     		  <input type="text" class="form-control" id="note" placeholder="Введите заметку"  name="note">
+    		  
+    		
+			</div>
+			</div>
+			
+			<div class="row">
+    	  	<div class="col-md-4"></div>
+    	  	<div class="col-md-4" style="background-color: silver">
+    		  <label for="date">День рождения</label>
+    		  <input type="date" class="form-control" id="date" placeholder="Введите дату рождения"  name="date">
     		  
     		
 			</div>
