@@ -11,7 +11,11 @@ class PhonebookController extends ControllerBase
 
     public function indexAction()
     {
-	
+		$types = Typephonenumber::find();
+		$this->view->types = $types;
+		
+		$groups = Group::find();
+		$this->view->groups = $groups;
     }
   
 	public function searchAction()
@@ -37,8 +41,10 @@ class PhonebookController extends ControllerBase
 		$ppls->andWhere('People.house LIKE \''.$this->request->getPost()['house'].'%\'');
 		$ppls->andWhere('People.apNumber LIKE \''.$this->request->getPost()['ap'].'%\'');
 		$ppls->andWhere('People.chosen LIKE \''.$this->request->getPost()['important'].'%\'');
+		
 		#$ppls->andWhere('People.note LIKE \''.$this->request->getPost()['note'].'%\'');
 		$ppls->join('People');
+		$ppls->join('Group');
 		$ppls->getQuery();
 		
 	
