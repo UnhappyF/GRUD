@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html style="background-color: #1f2b3b" >
+<head>
+	<title>Личный кабинет</title>
+</head>
+    <body style="background-color: #f2fafc"> 	     
+    	<nav class="navbar navbar-dark justify-content-between" style="background-color: #2e5179;">
+    				<a href="myspace/index" class="navbar-brand">
+    					<h1>
+    					<p class="text-light">
+    					<img src="/public/img/Call.png" width="50" height="50" alt="">
+    					Cправочник</p></h1></a>
+    					<?php echo $this->tag->form("myspace/exit"); ?>
+    				<?php echo $this->tag->linkTo(["phonebook", "Поиск контактов", 'class' => 'btn btn-secondary','style' =>'border: 2px solid black']); ?>
+    				<?php echo $this->tag->linkTo(["Myphonebook", "Мои контакты", 'class' => 'btn btn-secondary','style' =>'border: 2px solid black' ]); ?>
+    				 <button class="btn btn-secondary" style="border: 2px solid black;"type="submit">Выход</button>
+    			</form>
+    	</nav>
+    	<div class="container-fluid" style="background-color: #1f2b3b">
+<div class="row">
+	<div class="col"></div>
+	<div class="col">
+        <h1>
+        <p class="text-light text-center">
+        Изменение пароля
+    </p>
+</h1>
+<p><?php $this->flash->output() ?></p>
+<?php echo $this->tag->form("changepass/change"); ?>
+        <input type="password" class="form-control" id="temppassword" placeholder="Введите текущий пароль" name="temppassword">
+        <br>
+		<input type="password" class="form-control" id="password" placeholder="Введите новый пароль" name="password">
+        <br>
+        <input type="password" class="form-control" id="repeatePassword" placeholder="Повторите новый пароль" name="repeatePassword">
+        <br>
+		<button class="btn btn-secondary btn-block" style="border: 2px solid black;" type="submit">Изменить пароль</button>
+    </form>
+	</form>
+	</div>
+	<div class="col"></div>
+</div>
+
+<div>
+
+	</body>
+</html>

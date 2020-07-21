@@ -7,6 +7,7 @@ class IndexController extends ControllerBase
     public function indexAction()
     {
 
+
     }
 
     private function _registerSession($user)
@@ -23,31 +24,21 @@ class IndexController extends ControllerBase
     public function signinAction()
     {
         if($this->request->isPost()){
-            $mail = $this->request->getPost('email');
-            $pass = $this->request->getPost('password');  
             $user = User::findFirst(
             [
-                'email=:mail: AND password = :pass:',
+                'email=:mail: OR name=:mail:',
                 'bind'=>[
-                    'mail'=>$mail,
-                    'pass'=>$pass,
+                    'mail'=>$mail=$this->request->getPost('email'),
                 ],
-
             ]
         );
-        if ($user !== null) {
+        if ($user !== null && password_verify($this->request->getPost()['password'], $user->password)) {
             $this->_registerSession($user);
-
             $this->flash->success(
             'Добро пожаловать ' . $user->name
             );
             #Если юзер прошел авторизацию, то пропускаем его к контактам
-            return $this->dispatcher->forward(
-                    [
-                        'controller' => 'phonebook',
-                        'action'     => 'index',
-                    ]
-                );
+            header("Location: /myspace");
             }
             $this->flash->error(
                 'Неправильный пароль или Email адрес'

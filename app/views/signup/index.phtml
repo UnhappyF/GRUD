@@ -1,25 +1,36 @@
+<!DOCTYPE html>
+<html style="background-color: #1f2b3b">
+<head>
+    <title>Регистрация</title>
+</head>
 <body>
-	<br>
-	<br>
-	<br>
-	<div class="container-fluid">
+        <nav class="navbar navbar-dark justify-content-between" style="background-color: #2e5179;">
+            <a  class="navbar-brand">
+            <h1>
+            <p class="text-light">
+            <img src="/public/img/Call.png" width="50" height="50" alt="">
+            Cправочник</p></h1></a>
+        </form>
+        </nav>  
+	<div class="container-fluid" style="background-color: #1f2b3b">
     <?php echo $this->tag->form("signup/register"); ?>
     <br>
 	<br>
     	  <div class="form-group">
     	  	<div class="row">
     	  	<div class="col-md-4"></div>
-    	  	<div class="col-md-4" style="background-color: silver; ">
-    	  	<h1 class="text-center">Регистрация</h1>
-    		  <label for="email">Логин</label>
+    	  	<div class="col-md-4" style="background-color: #2e5179; ">
+    	  	<h1 class="text-center"><a class="text-white">Регистрация </a></h1>
+            <p><?php $this->flash->output() ?></p>
+    		  <label for="email"><a class="text-white">Логин </a></label>
     		  <input type="text" class="form-control" id="name" placeholder="Введите логин"  name="name">
     	    </div>
     	  </div>
     	  	
 			<div class="row">
     	  	<div class="col-md-4"></div>
-    	  	<div class="col-md-4" style="background-color: silver">
-    		  <label for="email">Email адрес</label>
+    	  	<div class="col-md-4" style="background-color: #2e5179">
+    		  <label for="email"><a class="text-white">Email адрес </a></label>
     		  <input type="email" class="form-control" id="email" placeholder="Введите email"  name="email">
     		  
     		
@@ -27,15 +38,24 @@
 			</div>
 			<div class="row">
     	  	<div class="col-md-4"></div>
-    	  	<div class="col-md-4" style="background-color: silver">
-    		  <label for="password">Пароль</label>
+    	  	<div class="col-md-4" style="background-color: #2e5179">
+    		  <label for="password"><a class="text-white">Пароль</a></label>
     		  <input type="password" class="form-control" id="password" placeholder="Введите пароль" name="password">
+
+
+              </div>
+            </div>
+            <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4" style="background-color: #2e5179">
+              <label for="confirmPassword"><a class="text-white">Повторите пароль </a></label>
+              <input type="Password" class="form-control" id="confirmPassword" placeholder="Повторите пароль" name="confirmPassword">
     		  
     		  <br>
-    		  <?php echo $this->tag->submitButton(["Регистрация", 'class' => 'btn btn-success  btn-block']); ?>
+    		  <?php echo $this->tag->submitButton(["Регистрация", 'class' => 'btn btn-secondary btn-block','style' =>'border: 2px solid black']); ?>
     		  </form>
     		  <br>
-				<?php echo $this->tag->linkTo(["index", "Назад", 'class' => 'btn btn-primary btn-block']); ?>
+				<?php echo $this->tag->linkTo(["index", "Назад", 'class' => 'btn btn-secondary btn-block','style' =>'border: 2px solid black']); ?>
     		  <br>
     	    </div>
     	  </div>
