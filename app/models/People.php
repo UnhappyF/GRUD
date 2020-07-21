@@ -19,6 +19,7 @@ public $street;
 public $house;
 public $apNumber;
 
+
 	public function initialize()
 	{
 		$this->setConnectionService('dbPhonebook');
@@ -46,6 +47,7 @@ public $apNumber;
 			['alias' => 'groups']
         );
 	}
+
 
 }
 ?>
