@@ -84,6 +84,7 @@ class SignupController extends Controller
 	          }  
 		#$success = $user->save($this->request->getPost(), array('name', 'email','password'));
 		if ($success) {
+
 			$this->flash->success(
             'Акаунт создан.Для дальнейшей работы войдите в акаунт'
             );

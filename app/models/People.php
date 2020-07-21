@@ -19,10 +19,35 @@ public $street;
 public $house;
 public $apNumber;
 
-public function initialize()
-{
-    $this->setConnectionService('dbPhonebook');
-}
+
+	public function initialize()
+	{
+		$this->setConnectionService('dbPhonebook');
+		
+		$this->hasMany(
+				'id',
+				'phoneNumber',
+				'idPeople',
+				['alias' => 'Phonenumber']
+			);
+			
+		$this->hasMany(
+				'id',
+				'Peoplegroup',
+				'idPeople',
+				['alias' => 'Peoplegroup']
+			);
+			
+		$this->hasManyToMany(
+            'id',
+            'Peoplegroup',
+            'idPeople', 'idGroup',
+            'Group',
+            'id',
+			['alias' => 'groups']
+        );
+	}
+
 
 }
 ?>
