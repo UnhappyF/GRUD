@@ -62,6 +62,12 @@ class PhonebookController extends ControllerBase
 		
 		#$ppls->andWhere('People.note LIKE \''.$this->request->getPost()['note'].'%\'');
 		$ppls->join('People');
+<<<<<<< HEAD
+=======
+	
+		$ppls->getQuery();
+		
+>>>>>>> ec7d40b88e1051e18188b9656b67bb5cfb802313
 	
 		$ppls->getQuery();
 		$paginator = new Paginator(
@@ -154,6 +160,18 @@ class PhonebookController extends ControllerBase
 				}
 			}
 
+<<<<<<< HEAD
+=======
+
+	}
+
+	
+
+
+	
+	
+
+>>>>>>> ec7d40b88e1051e18188b9656b67bb5cfb802313
 	public function createAction()
 	{
 

@@ -60,7 +60,12 @@ class SecurityPlugin extends Injectable
      }
      $privateResources = array(
 
+<<<<<<< HEAD
       'phonebook' => array('index', 'search', 'new', 'edit', 'create','save', 'delete','myspace','exit'),
+=======
+      'phonebook' => array('index', 'search', 'new', 'edit', 'create','save', 'delete'),
+
+>>>>>>> ec7d40b88e1051e18188b9656b67bb5cfb802313
       'myspace' => array('index', 'exit'),
       'changepass'=> array('index', 'exit', 'change', 'myspace'),
      );
