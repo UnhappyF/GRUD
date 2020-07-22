@@ -12,7 +12,7 @@ return new \Phalcon\Config([
         'adapter'     => 'Mysql',
         'host'        => 'localhost',
         'username'    => 'root',
-        'password'    => '1234',
+        'password'    => 'root',
         'dbname'      => 'prakt',
         'charset'     => 'utf8',
     ],
@@ -20,8 +20,7 @@ return new \Phalcon\Config([
         'adapter'     => 'Mysql',
         'host'        => 'localhost',
         'username'    => 'root',
-
-        'password'    => '1234',
+        'password'    => 'root',
 
         'dbname'      => 'phonebook',
         'charset'     => 'utf8',

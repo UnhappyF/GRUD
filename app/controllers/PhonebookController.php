@@ -21,6 +21,15 @@ class PhonebookController extends ControllerBase
 		$this->view->groups = $groups;
 
     }
+    public function myspaceAction()
+    {
+    	header("Location: /myspace");
+    }
+    public function exitAction()
+    {
+        $this->session->destroy();
+      	header("Location: /index");
+    }
   
 	public function searchAction()
 	{
@@ -52,15 +61,8 @@ class PhonebookController extends ControllerBase
 		if (!empty($this->request->getPost()['birth']))$ppls->andWhere('People.birth LIKE \''.$this->persistent->searchParams['birth'].'%\'');
 		
 		#$ppls->andWhere('People.note LIKE \''.$this->request->getPost()['note'].'%\'');
-		$ppls->join('People');
-	
+		$ppls->join('People');	
 		$ppls->getQuery();
-		
-	
-
-
-
-		
 		$paginator = new Paginator(
 			array(
 				"builder" => $ppls,
@@ -70,16 +72,9 @@ class PhonebookController extends ControllerBase
 		);
 
 		$page = $paginator->Paginate();
-		
-		
-		
-
-
 		$this->view->page = $page;
-		
 		$types = Typephonenumber::find();
 		$this->view->types = $types;
-		
 		$groups = Group::find();
 		$this->view->groups = $groups;
 
@@ -140,39 +135,23 @@ class PhonebookController extends ControllerBase
 		
 		}
 			$success = $people->save();
-		
-		
-		
-		
-		
-			
-				
-		
-			
 			$phonenumber->phoneNumber = $this->request->getPost()['phone'];
 			$phonenumber->idTypePhoneNumber = $this->request->getPost()['typeNumber'];
 			
 			$success = $phonenumber->save();
 			if ($success) {
-				echo "Контакт обновлён!";
-				echo $this->tag->linkTo("phonebook/search", "Перейти к справочнику");
-				
+				$this->flash->success(
+                'Контакт успешно обновлён'
+            );
+				header("Location: /phonebook/search");
+
 			}else {
-				echo "Ошибка: <br/>";
-				foreach ($phonenumber->getMessages() as $message) {
-					echo $message->getMessage(), "<br/>";
+				$this->flash->error(
+                'Контак не удалось обновить'
+            );
+				header("Location: /phonebook/search");
 				}
 			}
-
-
-	}
-
-	
-
-
-	
-	
-
 	public function createAction()
 	{
 
@@ -226,13 +205,6 @@ class PhonebookController extends ControllerBase
 		}
 		
 		$success = $people->save();
-		
-		
-		
-		
-		
-		
-		
 		if ($success) {
 			
 			$phonenumber = new phonenumber();
@@ -243,20 +215,36 @@ class PhonebookController extends ControllerBase
 			$phonenumber->idOperator = 1;
 			$success2 = $phonenumber->save();
 			if ($success2) {
-				echo "Контакт добавлен!";
-				echo $this->tag->linkTo("phonebook/search", "Перейти к справочнику");
-				echo $this->tag->linkTo("phonebook/new", "Добавить еще контакт");
+				$this->flash->success(
+                'Контакт успешно добавлен'
+            );
+				return $this->dispatcher->forward(
+            [
+                'controller' => 'phonebook',
+                'action'     => 'new',
+            ]
+        );
 			}else {
-				echo "Ошибка: <br/>";
-				foreach ($phonenumber->getMessages() as $message) {
-					echo $message->getMessage(), "<br/>";
-				}
+				$this->flash->error(
+                'Ошибка при добавление контакта'
+            );
+				return $this->dispatcher->forward(
+            [
+                'controller' => 'phonebook',
+                'action'     => 'new',
+            ]
+        );
 			}
 		} else {
-			echo "Ошибка: <br/>";
-			foreach ($people->getMessages() as $message) {
-				echo $message->getMessage(), "<br/>";
-			}
+				$this->flash->error(
+                'Введите имя контакта'
+            );
+				return $this->dispatcher->forward(
+            [
+                'controller' => 'phonebook',
+                'action'     => 'new',
+            ]
+        );
 		}
 
 	}
@@ -273,16 +261,27 @@ class PhonebookController extends ControllerBase
 
 		if ($Phone !== false) {
 			if ($Phone->delete() === false) {
-				echo "К сожалению, мы не можем удалить телефон прямо сейчас: \n";
+				
+				$this->flash->error(
+                'Контакт не удалось удалить'
+            );
+				return $this->dispatcher->forward(
+            [
+                'controller' => 'phonebook',
+                'action'     => 'search',
+            ]
+        );
 
-				$messages = $Phone->getMessages();
-
-				foreach ($messages as $message) {
-					echo $message, "\n";
-				}
 			} else {
-				echo $this->tag->linkTo("phonebook/search", "Перейти к справочнику");
-				echo 'Телефон был успешно удален!';
+				$this->flash->success(
+                'Контакт успешно удалён'
+            );
+				return $this->dispatcher->forward(
+            [
+                'controller' => 'phonebook',
+                'action'     => 'search',
+            ]
+        );
 			}
 		}
 

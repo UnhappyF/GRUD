@@ -1,14 +1,12 @@
-
-
 <style>
    .accordion {
-  background-color: #eee;
-  color: #444;
+  background-color: #2e5179;
+  color: #2e5179;
   cursor: pointer;
   padding: 18px;
-  width: 50%;
+  width: 100%;
   text-align: center;
-  border: none;
+  border: 1px solid black;
   outline: none;
   transition: 0.4s;
 }
@@ -27,7 +25,7 @@
 }
 input[type=text] {
 	
-	width: 50%;
+	width: 100%;
 	border: none;
 	border-bottom: 2px solid grey;
  
@@ -41,24 +39,43 @@ input[type=date] {
 }
 #address {
 	display:inline-block;
-    width: 12%; 
+    width: 20%; 
    } 
 </style>
-  
-  
 
+ <!DOCTYPE html>
+<html style="background-color: #1f2b3b">
+<head>
+    <title>Контакты</title>
+</head>
+<body> 
 
+	<nav class="navbar navbar-dark justify-content-between" style="background-color: #2e5179;">
+    				<a href="myspace/index" class="navbar-brand">
+    					<h1>
+    					<p class="text-light">
+    					<img src="/public/img/Call.png" width="50" height="50" alt="">
+    					Cправочник</p></h1></a>
+    				<?php echo $this->tag->form("phonebook/exit"); ?>
+    				<?php echo $this->tag->linkTo(["phonebook/search", "Поиск контактов", 'class' => 'btn btn-secondary','style' =>'border: 2px solid black']); ?>
+    				 <button class="btn btn-secondary" style="border: 2px solid black;"type="submit">Выход</button>
+    			</form>
+    	</nav>  
+<div class="row" style="background-color: #1f2b3b">
+	<div class="col-4"></div>
+	<div class="col-4">
+		<p><?php $this->flash->output() ?></p>
+		<br>
 
 <?php
 
 	foreach($page->GetItems() as $people){
-	echo '<button class="accordion">'.$people->getPeople()->name.' ';
-	
-	echo $people->phoneNumber.'</button>';
+	echo '<button class="accordion"><a class="text-white">'.$people->getPeople()->name.' ';
+	echo $people->phoneNumber.'</a></button>';
 	
 	
 	echo '
-		<div class="panel">
+		<div class="panel" style="background-color: #2e5179; border:1px solid black" >
 		<p>';
 		echo $this->tag->form("phonebook/edit/".$people->phoneNumber);
 		echo '
@@ -112,11 +129,10 @@ input[type=date] {
     		
 		
 		';
-		
-		echo $this->tag->submitButton("Изменить");
+		echo $this->tag->submitButton(["Изменить",'class' => 'btn btn-secondary','style' =>'border: 2px solid black']);
 		echo '</form>';
 		echo '<br>';
-		echo $this->tag->linkTo("phonebook/delete/".$people->phoneNumber, "Удалить").'
+		echo $this->tag->linkTo(["phonebook/delete/".$people->phoneNumber, "Удалить",'class' => 'btn btn-secondary btn-block','style' =>'border: 2px solid black']).'
 		</p>
 		
 		</div>';
@@ -128,20 +144,24 @@ input[type=date] {
 	<tr>
 	<td colspan="7">
 	<div>';
-	echo $this->tag->linkTo("phonebook/search", "Первая").' ';
-	echo $this->tag->linkTo("phonebook/search?page=".$page->previous, "Предыдущая").' ';
-	echo $this->tag->linkTo("phonebook/search?page=".$page->next, "Следующая").' ';
-	echo $this->tag->linkTo("phonebook/search?page=".$page->last, "Последняя").' ';
+	echo $this->tag->linkTo(["phonebook/search", "Первая",'class' => 'btn btn-secondary','style' =>'border: 2px solid black']).' ';
+	echo $this->tag->linkTo(["phonebook/search?page=".$page->previous, "Предыдущая",'class' => 'btn btn-secondary','style' =>'border: 2px solid black']).' ';
+	echo $this->tag->linkTo(["phonebook/search?page=".$page->next, "Следующая",'class' => 'btn btn-secondary','style' =>'border: 2px solid black']).' ';
+	echo $this->tag->linkTo(["phonebook/search?page=".$page->last, "Последняя",'class' => 'btn btn-secondary','style' =>'border: 2px solid black']).' ';
 	echo '<br>';
-	echo '<span class="help-inline">'.$page->current.' из '. $page->last .'</span>
+	echo '<a class="text-white"><span class="help-inline">'.$page->current.' из '. $page->last .'</span></a>
 	</div>
 	</td>
 	</tr>
 	</tbody>
 	</table>';
 
-	 echo $this->tag->linkTo(["phonebook", "Найти контакты", 'class' => 'btn btn-secondary','style' =>'border: 2px solid black']);
+	 echo $this->tag->linkTo(["phonebook", "Найти контакты", 'class' => 'btn btn-secondary btn-block','style' =>'border: 2px solid black']);
+	 echo $this->tag->linkTo(["phonebook/new", "Добавить новый контакт", 'class' => 'btn btn-secondary btn-block','style' =>'border: 2px solid black']);
 ?>
+
+</div>
+</div>
 <script>
 var acc = document.getElementsByClassName("accordion");
 var i;
@@ -160,3 +180,6 @@ for (i = 0; i < acc.length; i++) {
   });
 }
 </script>
+
+</body>
+</html>
