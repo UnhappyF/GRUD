@@ -61,14 +61,7 @@ class PhonebookController extends ControllerBase
 		if (!empty($this->request->getPost()['birth']))$ppls->andWhere('People.birth LIKE \''.$this->persistent->searchParams['birth'].'%\'');
 		
 		#$ppls->andWhere('People.note LIKE \''.$this->request->getPost()['note'].'%\'');
-		$ppls->join('People');
-<<<<<<< HEAD
-=======
-	
-		$ppls->getQuery();
-		
->>>>>>> ec7d40b88e1051e18188b9656b67bb5cfb802313
-	
+		$ppls->join('People');	
 		$ppls->getQuery();
 		$paginator = new Paginator(
 			array(
@@ -159,19 +152,6 @@ class PhonebookController extends ControllerBase
 				header("Location: /phonebook/search");
 				}
 			}
-
-<<<<<<< HEAD
-=======
-
-	}
-
-	
-
-
-	
-	
-
->>>>>>> ec7d40b88e1051e18188b9656b67bb5cfb802313
 	public function createAction()
 	{
 
