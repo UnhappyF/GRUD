@@ -69,6 +69,7 @@
     	  	<div class="col-md-4" style="background-color: silver">
     		  <label for="typePhone">Тип номера</label>
 				<select name = "typeNumber">
+				<option value="0">Любой</option>';
 				<?php 
 				foreach($types as $type){
 					echo '<option value="'.$type->id.'">'.$type->name.'</option>';

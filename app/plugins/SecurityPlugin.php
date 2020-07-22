@@ -59,11 +59,9 @@ class SecurityPlugin extends Injectable
          $acl->addRole($role); 
      }
      $privateResources = array(
-<<<<<<< HEAD
+
       'phonebook' => array('index', 'search', 'new', 'edit', 'create','save', 'delete'),
-=======
-      'phonebook' => array('index', 'search'),
->>>>>>> 0111588a5aaeddfa191d326d8b8e8e9a3480f2cc
+
       'myspace' => array('index', 'exit'),
       'changepass'=> array('index', 'exit', 'change', 'myspace'),
      );
