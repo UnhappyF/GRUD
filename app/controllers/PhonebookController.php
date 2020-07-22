@@ -21,6 +21,15 @@ class PhonebookController extends ControllerBase
 		$this->view->groups = $groups;
 
     }
+    public function myspaceAction()
+    {
+    	header("Location: /myspace");
+    }
+    public function exitAction()
+    {
+        $this->session->destroy();
+      	header("Location: /index");
+    }
   
 	public function searchAction()
 	{
@@ -36,29 +45,25 @@ class PhonebookController extends ControllerBase
 		
 		$ppls = $this->modelsManager->createBuilder();
 		$ppls->from('Phonenumber');
-		$ppls->where('People.name LIKE \''.$this->persistent->searchParams['name'].'%\'');
-		$ppls->andWhere('Phonenumber.phoneNumber LIKE \''.$this->persistent->searchParams['phone'].'%\'');
-		$ppls->andWhere('People.secondName LIKE \''.$this->persistent->searchParams['lastName'].'%\'');
-		$ppls->andWhere('People.patronomic LIKE \''.$this->persistent->searchParams['fatherName'].'%\'');
-		$ppls->andWhere('People.mail LIKE \''.$this->persistent->searchParams['email'].'%\'');
-		$ppls->andWhere('People.organizationName LIKE \''.$this->persistent->searchParams['orgName'].'%\'');
-		$ppls->andWhere('People.city LIKE \''.$this->persistent->searchParams['city'].'%\'');
-		$ppls->andWhere('People.street LIKE \''.$this->persistent->searchParams['street'].'%\'');
-		$ppls->andWhere('People.house LIKE \''.$this->persistent->searchParams['house'].'%\'');
-		$ppls->andWhere('People.apNumber LIKE \''.$this->persistent->searchParams['ap'].'%\'');
-		$ppls->andWhere('People.chosen LIKE \''.$this->persistent->searchParams['important'].'%\'');
-		$ppls->andWhere('Phonenumber.idTypePhoneNumber LIKE \''.$this->persistent->searchParams['typeNumber'].'%\'');
-		$ppls->andWhere('People.birth LIKE \''.$this->persistent->searchParams['birth'].'%\'');
+		$ppls->where('People.name LIKE :name:', ['name' => $this->persistent->searchParams['name'].'%']);
+		$ppls->andWhere('Phonenumber.phoneNumber LIKE :phone:', ['phone' => $this->persistent->searchParams['phone'].'%']);
+		$ppls->andWhere('People.secondName LIKE :lastName:', ['lastName' => $this->persistent->searchParams['lastName'].'%']);
+		$ppls->andWhere('People.patronomic LIKE :fatherName:', ['fatherName' => $this->persistent->searchParams['fatherName'].'%']);
+		$ppls->andWhere('People.mail LIKE :email:', ['email' => $this->persistent->searchParams['email'].'%']);
+		$ppls->andWhere('People.organizationName LIKE :orgName:', ['orgName' => $this->persistent->searchParams['orgName'].'%']);
+		$ppls->andWhere('People.city LIKE :city:', ['city' => $this->persistent->searchParams['city'].'%']);
+		$ppls->andWhere('People.street LIKE :street:', ['street' => $this->persistent->searchParams['street'].'%']);
+		$ppls->andWhere('People.house LIKE :house:', ['house' => $this->persistent->searchParams['house'].'%']);
+		$ppls->andWhere('People.apNumber LIKE :ap:', ['ap' => $this->persistent->searchParams['ap'].'%']);
+		$ppls->andWhere('People.chosen LIKE :important:', ['important' => $this->persistent->searchParams['important'].'%']);
+		if($this->persistent->searchParams['typeNumber']!=0)$ppls->andWhere('Phonenumber.idTypePhoneNumber LIKE :typeNumber:', ['typeNumber' => $this->persistent->searchParams['typeNumber'].'%']);
+		
+		if (!empty($this->request->getPost()['birth']))$ppls->andWhere('People.birth LIKE \''.$this->persistent->searchParams['birth'].'%\'');
+		
 		#$ppls->andWhere('People.note LIKE \''.$this->request->getPost()['note'].'%\'');
 		$ppls->join('People');
-		$ppls->join('Group');
-		$ppls->getQuery();
-		
 	
-
-
-
-		
+		$ppls->getQuery();
 		$paginator = new Paginator(
 			array(
 				"builder" => $ppls,
@@ -68,16 +73,9 @@ class PhonebookController extends ControllerBase
 		);
 
 		$page = $paginator->Paginate();
-		
-		
-		
-
-
 		$this->view->page = $page;
-		
 		$types = Typephonenumber::find();
 		$this->view->types = $types;
-		
 		$groups = Group::find();
 		$this->view->groups = $groups;
 
@@ -138,40 +136,23 @@ class PhonebookController extends ControllerBase
 		
 		}
 			$success = $people->save();
-		
-		
-		
-		
-		
-			
-				
-		
-			
 			$phonenumber->phoneNumber = $this->request->getPost()['phone'];
 			$phonenumber->idTypePhoneNumber = $this->request->getPost()['typeNumber'];
 			
 			$success = $phonenumber->save();
 			if ($success) {
-				echo "Контакт обновлён!";
-				echo $this->tag->linkTo("phonebook/search", "Перейти к справочнику");
-				
+				$this->flash->success(
+                'Контакт успешно обновлён'
+            );
+				header("Location: /phonebook/search");
+
 			}else {
-				echo "Ошибка: <br/>";
-				foreach ($phonenumber->getMessages() as $message) {
-					echo $message->getMessage(), "<br/>";
+				$this->flash->error(
+                'Контак не удалось обновить'
+            );
+				header("Location: /phonebook/search");
 				}
 			}
-
-<<<<<<< HEAD
-=======
-	}
-
-	
->>>>>>> 0111588a5aaeddfa191d326d8b8e8e9a3480f2cc
-	}
-
-	
-	
 
 	public function createAction()
 	{
@@ -226,13 +207,6 @@ class PhonebookController extends ControllerBase
 		}
 		
 		$success = $people->save();
-		
-		
-		
-		
-		
-		
-		
 		if ($success) {
 			
 			$phonenumber = new phonenumber();
@@ -243,20 +217,36 @@ class PhonebookController extends ControllerBase
 			$phonenumber->idOperator = 1;
 			$success2 = $phonenumber->save();
 			if ($success2) {
-				echo "Контакт добавлен!";
-				echo $this->tag->linkTo("phonebook/search", "Перейти к справочнику");
-				echo $this->tag->linkTo("phonebook/new", "Добавить еще контакт");
+				$this->flash->success(
+                'Контакт успешно добавлен'
+            );
+				return $this->dispatcher->forward(
+            [
+                'controller' => 'phonebook',
+                'action'     => 'new',
+            ]
+        );
 			}else {
-				echo "Ошибка: <br/>";
-				foreach ($phonenumber->getMessages() as $message) {
-					echo $message->getMessage(), "<br/>";
-				}
+				$this->flash->error(
+                'Ошибка при добавление контакта'
+            );
+				return $this->dispatcher->forward(
+            [
+                'controller' => 'phonebook',
+                'action'     => 'new',
+            ]
+        );
 			}
 		} else {
-			echo "Ошибка: <br/>";
-			foreach ($people->getMessages() as $message) {
-				echo $message->getMessage(), "<br/>";
-			}
+				$this->flash->error(
+                'Введите имя контакта'
+            );
+				return $this->dispatcher->forward(
+            [
+                'controller' => 'phonebook',
+                'action'     => 'new',
+            ]
+        );
 		}
 
 	}
@@ -273,16 +263,27 @@ class PhonebookController extends ControllerBase
 
 		if ($Phone !== false) {
 			if ($Phone->delete() === false) {
-				echo "К сожалению, мы не можем удалить телефон прямо сейчас: \n";
+				
+				$this->flash->error(
+                'Контакт не удалось удалить'
+            );
+				return $this->dispatcher->forward(
+            [
+                'controller' => 'phonebook',
+                'action'     => 'search',
+            ]
+        );
 
-				$messages = $Phone->getMessages();
-
-				foreach ($messages as $message) {
-					echo $message, "\n";
-				}
 			} else {
-				echo $this->tag->linkTo("phonebook/search", "Перейти к справочнику");
-				echo 'Телефон был успешно удален!';
+				$this->flash->success(
+                'Контакт успешно удалён'
+            );
+				return $this->dispatcher->forward(
+            [
+                'controller' => 'phonebook',
+                'action'     => 'search',
+            ]
+        );
 			}
 		}
 

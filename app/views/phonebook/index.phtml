@@ -1,109 +1,92 @@
+<!DOCTYPE html>
+<html style="background-color: #1f2b3b">
+<head>
+    <title>Поиск контактов</title>
+</head>
 <body>
-
-
-	
-	<div class="container-fluid">
+    <nav class="navbar navbar-dark justify-content-between" style="background-color: #2e5179;">
+                    <a href="myspace/index" class="navbar-brand">
+                        <h1>
+                        <p class="text-light">
+                        <img src="/public/img/Call.png" width="50" height="50" alt="">
+                        Cправочник</p></h1></a>
+                    <?php echo $this->tag->form("phonebook/exit"); ?>
+                    <?php echo $this->tag->linkTo(["phonebook/search", "Поиск контактов", 'class' => 'btn btn-secondary','style' =>'border: 2px solid black']); ?>
+                     <button class="btn btn-secondary" style="border: 2px solid black;"type="submit">Выход</button>
+                </form>
+        </nav>  
+	<div class="container-fluid" style="background-color: #1f2b3b">
     <?php echo $this->tag->form("phonebook/search"); ?>
     <br>
-	
-
 
     	  <div class="form-group">
     	  	<div class="row">
     	  	<div class="col-md-4"></div>
-    	  	<div class="col-md-4" style="background-color: silver; ">
-    	  	<h1 class="text-center">Поиск</h1>
-    		  <label for="name">Имя</label>
+    	  	<div class="col-md-4" style="background-color: #2e5179; ">
+    	  	<h1 class="text-center"><p class="text-light text-center">Поиск</p></h1>
+    		  <label for="name"><a class="text-light text-center">Имя </a></label>
     		  <input type="text" class="form-control" id="name" placeholder="Введите имя"  name="name">
     	    </div>
     	  </div>
-    	  	
 			<div class="row">
     	  	<div class="col-md-4"></div>
-    	  	<div class="col-md-4" style="background-color: silver">
-    		  <label for="phone">Телефон</label>
+    	  	<div class="col-md-4" style="background-color: #2e5179">
+    		  <label for="phone"><a class="text-light text-center">Телефон </a></label>
     		  <input type="text" class="form-control" id="phone" placeholder="Введите телефон"  name="phone">
-    		  
-    		
-
-
 			</div>
     	  </div>
-    		  
-			  
 			  <div class="row">
     	  	<div class="col-md-4"></div>
-    	  	<div class="col-md-4" style="background-color: silver">
-    		  <label for="lastName">Фамилия</label>
+    	  	<div class="col-md-4" style="background-color: #2e5179">
+    		  <label for="lastName"><a class="text-light text-center">Фамилия </a></label>
     		  <input type="text" class="form-control" id="lastName" placeholder="Введите фамилию"  name="lastName">
-    		  
-    		
 			</div>
 			</div>
-			
 			<div class="row">
     	  	<div class="col-md-4"></div>
-    	  	<div class="col-md-4" style="background-color: silver">
-    		  <label for="fatherName">Отчество</label>
+    	  	<div class="col-md-4" style="background-color: #2e5179">
+    		  <label for="fatherName"><a class="text-light text-center">Отчество </a></label>
     		  <input type="text" class="form-control" id="fatherName" placeholder="Введите отчество"  name="fatherName">
-    		  
-    		
 			</div>
 			</div>
-			
-	
 			<div class="row">
     	  	<div class="col-md-4"></div>
-    	  	<div class="col-md-4" style="background-color: silver">
-    		  <label for="email">Email адрес</label>
+    	  	<div class="col-md-4" style="background-color: #2e5179">
+    		  <label for="email"><a class="text-light text-center">Email адрес </a></label>
     		  <input type="text" class="form-control" id="email" placeholder="Введите email"  name="email">
-    		  
-    		
 			</div>
 			</div>
-			
-			
-			
 			<div class="row">
     	  	<div class="col-md-4"></div>
-    	  	<div class="col-md-4" style="background-color: silver">
-    		  <label for="typePhone">Тип номера</label>
+    	  	<div class="col-md-4" style="background-color: #2e5179">
+    		  <label for="typePhone"><a class="text-light text-center">Тип номера </a></label>
 				<select name = "typeNumber">
+				<option value="0"><a class="text-light text-center">Любой </a></option>';
 				<?php 
 				foreach($types as $type){
 					echo '<option value="'.$type->id.'">'.$type->name.'</option>';
 				}
 				?>
 				</select>
-    		  
-    		
 			</div>
 			</div>
-			
-			
 			<div class="row">
     	  	<div class="col-md-4"></div>
-    	  	<div class="col-md-4" style="background-color: silver">
-    		  <label for="groups">Группы</label>
+    	  	<div class="col-md-4" style="background-color: #2e5179">
+    		  <label for="groups"><a class="text-light text-center">Группы </a></label>
 				<select name = "groups[]" multiple>
 				<?php 
 				foreach($groups as $group){
 					echo '<option value="'.$group->id.'">'.$group->name.'</option>';
 				}
 				?>
-				</select>
-    		  
-    		
+				</select>   		
 			</div>
 			</div>
-			
-			
-			
-			
 			<div class="row">
     	  	<div class="col-md-4"></div>
-    	  	<div class="col-md-4" style="background-color: silver">
-    		  <label for="birth">День рождения</label>
+    	  	<div class="col-md-4" style="background-color: #2e5179">
+    		  <label for="birth"><a class="text-light text-center">День рождения </a></label>
     		  <input type="date" class="form-control" id="birth" placeholder="Введите дату рождения"  name="birth">
     		  
     		
@@ -112,8 +95,8 @@
 			
 			<div class="row">
     	  	<div class="col-md-4"></div>
-    	  	<div class="col-md-4" style="background-color: silver">
-    		  <label for="orgName">Название организации</label>
+    	  	<div class="col-md-4" style="background-color: #2e5179">
+    		  <label for="orgName"><a class="text-light text-center">Название организации </a></label>
     		  <input type="text" class="form-control" id="orgName" placeholder="Введите название организации"  name="orgName">
     		  
     		
@@ -121,8 +104,8 @@
 			</div>
 			<div class="row">
     	  	<div class="col-md-4"></div>
-    	  	<div class="col-md-4" style="background-color: silver">
-    		  <label for="address">Адрес</label>
+    	  	<div class="col-md-4" style="background-color: #2e5179">
+    		  <label for="address"><a class="text-light text-center">Адрес </a></label>
     		  <input type="text" class="form-control" id="city" placeholder="Введите город"  name="city">
 			  <input type="text" class="form-control" id="street" placeholder="Введите улицу"  name="street">
 			  <input type="text" class="form-control" id="house" placeholder="Дом"  name="house">
@@ -134,9 +117,9 @@
 			
 			<div class="row">
     	  	<div class="col-md-4"></div>
-    	  	<div class="col-md-4" style="background-color: silver">
+    	  	<div class="col-md-4" style="background-color: #2e5179">
     		  
-    		  <p><input type="checkbox" name="important" value="1"> Важный контакт</p>	
+    		  <p><input type="checkbox" name="important" value="1"> <a class="text-light text-center">Важный контакт </a></p>	
     		  
     		 
     	    </div>
@@ -145,14 +128,13 @@
 			  
 			  	<div class="row">
     	  	<div class="col-md-4"></div>
-    	  	<div class="col-md-4" style="background-color: silver">
+    	  	<div class="col-md-4" style="background-color: #2e5179">
 
 
     		  <br>
-    		  <?php echo $this->tag->submitButton(["Поиск", 'class' => 'btn btn-success  btn-block']); ?>
+    		  <?php echo $this->tag->submitButton(["Поиск", 'class' => 'btn btn-secondary btn-block','style' =>'border: 2px solid black']); ?>
     		  </form>
-			   <br>
-    		  
+			   <br> 
     	    </div>
     	  </div>
     	  </div>
