@@ -98,24 +98,24 @@ class PhonebookController extends ControllerBase
 	public function editAction($number)
 	{
 			
-			$phonenumber = Phonenumber::findFirst('phoneNumber = \''.$number.'\'');
+			$phonenumber = Phonenumber::findFirst('phoneNumber = \''.addslashes($number).'\'');
 			
-			$people = People::findFirst('id = \''.$phonenumber->idPeople.'\'');
+			$people = People::findFirst('id = \''.addslashes($phonenumber->idPeople).'\'');
 			
-			$people->name = $this->request->getPost()['name'];
+			$people->name = addslashes($this->request->getPost()['name']);
 			
-			$people->secondName = $this->request->getPost()['secondName'];
+			$people->secondName = addslashes($this->request->getPost()['secondName']);
 			
-			$people->patronomic = $this->request->getPost()['fatherName'];
-			$people->mail = $this->request->getPost()['mail'];
+			$people->patronomic = addslashes($this->request->getPost()['fatherName']);
+			$people->mail = addslashes($this->request->getPost()['mail']);
 			
-			$people->organizationName = $this->request->getPost()['orgName'];
-			$people->city = $this->request->getPost()['city'];
-			$people->street = $this->request->getPost()['street'];
+			$people->organizationName = addslashes($this->request->getPost()['orgName']);
+			$people->city = addslashes($this->request->getPost()['city']);
+			$people->street = addslashes($this->request->getPost()['street']);
 			
-			$people->house = $this->request->getPost()['house'];
-			$people->apNumber = $this->request->getPost()['ap'];
-			$people->birth = empty($this->request->getPost()['birth']) ? NULL:$this->request->getPost()['birth'];
+			$people->house = addslashes($this->request->getPost()['house']);
+			$people->apNumber =addslashes( $this->request->getPost()['ap']);
+			$people->birth = empty($this->request->getPost()['birth']) ? NULL:addslashes($this->request->getPost()['birth']);
 			
 			
 			$people->peoplegroup->delete();
@@ -124,8 +124,8 @@ class PhonebookController extends ControllerBase
 			
 			
 		
-			$group = new Group();
-			$group->name = 'Test';
+		
+			
 			$groups = Group::find([
 				'id IN ({letter:array})',
 				'bind' => [
@@ -179,26 +179,26 @@ class PhonebookController extends ControllerBase
 			
 	$people = new people();
 		
-		$people->name = $this->request->getPost()['name'];
-		$people->email = $this->request->getPost()['email'];
-		$people->secondName = $this->request->getPost()['lastName'];
+		$people->name = addslashes($this->request->getPost()['name']);
+		$people->email = addslashes($this->request->getPost()['email']);
+		$people->secondName = addslashes($this->request->getPost()['lastName']);
 		
-		$people->patronomic = $this->request->getPost()['fatherName'];
-		$people->mail = $this->request->getPost()['email'];
-		$people->note = $this->request->getPost()['note'];
+		$people->patronomic = addslashes($this->request->getPost()['fatherName']);
+		$people->mail = addslashes($this->request->getPost()['email']);
+		$people->note = addslashes($this->request->getPost()['note']);
 	
-		$people->chosen = isset($this->request->getPost()['important'])       ? $this->request->getPost()['important'] : '0';
+		$people->chosen = isset($this->request->getPost()['important'])       ? addslashes($this->request->getPost()['important']) : '0';
 		
 		
 		
-		$people->organizationName = $this->request->getPost()['orgName'];
-		$people->city = $this->request->getPost()['city'];
-		$people->street = $this->request->getPost()['street'];
+		$people->organizationName = addslashes($this->request->getPost()['orgName']);
+		$people->city = addslashes($this->request->getPost()['city']);
+		$people->street = addslashes($this->request->getPost()['street']);
 		
-		$people->house = $this->request->getPost()['house'];
-		$people->apNumber = $this->request->getPost()['ap'];
+		$people->house = addslashes($this->request->getPost()['house']);
+		$people->apNumber = addslashes($this->request->getPost()['ap']);
 		
-		$people->birth = empty($this->request->getPost()['birth']) ? NULL:$this->request->getPost()['birth'];
+		$people->birth = empty($this->request->getPost()['birth']) ? NULL: addslashes($this->request->getPost()['birth']);
 		
 		
 		if(isset($this->request->getPost()['groups'])){
@@ -237,8 +237,8 @@ class PhonebookController extends ControllerBase
 			
 			$phonenumber = new phonenumber();
 	
-			$phonenumber->phoneNumber = $this->request->getPost()['phone'];
-			$phonenumber->idTypePhoneNumber = $this->request->getPost()['typeNumber'];
+			$phonenumber->phoneNumber = addslashes($this->request->getPost()['phone']);
+			$phonenumber->idTypePhoneNumber = addslashes($this->request->getPost()['typeNumber']);
 			$phonenumber->idPeople = $people->id;
 			$phonenumber->idOperator = 1;
 			$success2 = $phonenumber->save();
