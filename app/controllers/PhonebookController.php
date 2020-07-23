@@ -42,7 +42,7 @@ class PhonebookController extends ControllerBase
 			$this->persistent->searchParams = $this->request->getPost();
 		}
 		
-		
+		if($this->request->isPost() || isset($_GET['page'])){
 		$ppls = $this->modelsManager->createBuilder();
 		$ppls->from('Phonenumber');
 		$ppls->where('People.name LIKE :name:', ['name' => $this->persistent->searchParams['name'].'%']);
@@ -63,6 +63,30 @@ class PhonebookController extends ControllerBase
 		#$ppls->andWhere('People.note LIKE \''.$this->request->getPost()['note'].'%\'');
 		$ppls->join('People');	
 		$ppls->getQuery();
+		
+		}else{
+		$ppls = $this->modelsManager->createBuilder();
+		$ppls->from('Phonenumber');
+		$ppls->where('People.name LIKE :name:', ['name' => '%']);
+		$ppls->andWhere('Phonenumber.phoneNumber LIKE :phone:', ['phone' => '%']);
+		$ppls->andWhere('People.secondName LIKE :lastName:', ['lastName' => '%']);
+		$ppls->andWhere('People.patronomic LIKE :fatherName:', ['fatherName' => '%']);
+		$ppls->andWhere('People.mail LIKE :email:', ['email' => '%']);
+		$ppls->andWhere('People.organizationName LIKE :orgName:', ['orgName' => '%']);
+		$ppls->andWhere('People.city LIKE :city:', ['city' => '%']);
+		$ppls->andWhere('People.street LIKE :street:', ['street' => '%']);
+		$ppls->andWhere('People.house LIKE :house:', ['house' => '%']);
+		$ppls->andWhere('People.apNumber LIKE :ap:', ['ap' => '%']);
+		$ppls->andWhere('People.chosen LIKE :important:', ['important' => '%']);
+		if($this->persistent->searchParams['typeNumber']!=0)$ppls->andWhere('Phonenumber.idTypePhoneNumber LIKE :typeNumber:', ['typeNumber' => '%']);
+		
+		if (!empty($this->request->getPost()['birth']))$ppls->andWhere('People.birth LIKE \''.$this->persistent->searchParams['birth'].'%\'');
+		
+		#$ppls->andWhere('People.note LIKE \''.$this->request->getPost()['note'].'%\'');
+		$ppls->join('People');	
+		$ppls->getQuery();
+			
+		}
 		$paginator = new Paginator(
 			array(
 				"builder" => $ppls,
