@@ -16,7 +16,7 @@ public function initialize()
 	
 	$this->hasManyToMany(
             'id',
-            'Peoplegroup',
+            'PeopleGroup',
             'idGroup', 'idPeople',
             'People',
             'id',
