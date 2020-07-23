@@ -13,7 +13,7 @@ class PhonebookController extends ControllerBase
 
     public function indexAction()
     {
-
+		
 		$types = TypePhoneNumber::find();
 		$this->view->types = $types;
 		
@@ -37,10 +37,10 @@ class PhonebookController extends ControllerBase
 		
 		$currentPage = (int) isset($_GET['page']) ? $_GET['page']:1;
 
-
 		if($this->request->isPost()){
 			$this->persistent->searchParams = $this->request->getPost();
 		}
+		
 		
 		if($this->request->isPost() || isset($_GET['page'])){
 		$ppls = $this->modelsManager->createBuilder();
@@ -65,6 +65,11 @@ class PhonebookController extends ControllerBase
 		$ppls->getQuery();
 		
 		}else{
+			
+			$this->persistent->searchParams =['name' => '', 'phone' =>'', 'lastName' =>'', 'fatherName' =>'', 'email' =>'', 'TypeNumber'=> 0, 'birth' =>'', 'orgName' =>'', 'city' =>'', 'street' =>'', 'house' =>'', 'ap' =>'' ];
+			
+			
+			
 		$ppls = $this->modelsManager->createBuilder();
 		$ppls->from('Phonenumber');
 		$ppls->where('People.name LIKE :name:', ['name' => '%']);
@@ -101,6 +106,8 @@ class PhonebookController extends ControllerBase
 		$this->view->types = $types;
 		$groups = Group::find();
 		$this->view->groups = $groups;
+		
+		
 
 	}
 
