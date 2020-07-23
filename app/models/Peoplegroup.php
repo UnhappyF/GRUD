@@ -2,7 +2,7 @@
 
 use Phalcon\Mvc\Model;
 
-class Peoplegroup extends Model{
+class PeopleGroup extends Model{
 	
 public $idPeople;
 public $idGroup;

@@ -14,7 +14,7 @@ class PhonebookController extends ControllerBase
     public function indexAction()
     {
 
-		$types = Typephonenumber::find();
+		$types = TypePhoneNumber::find();
 		$this->view->types = $types;
 		
 		$groups = Group::find();
@@ -97,7 +97,7 @@ class PhonebookController extends ControllerBase
 
 		$page = $paginator->Paginate();
 		$this->view->page = $page;
-		$types = Typephonenumber::find();
+		$types = TypePhoneNumber::find();
 		$this->view->types = $types;
 		$groups = Group::find();
 		$this->view->groups = $groups;
@@ -107,7 +107,7 @@ class PhonebookController extends ControllerBase
 	public function newAction()
 	{
 
-		$types = Typephonenumber::find();
+		$types = TypePhoneNumber::find();
 		$this->view->types = $types;
 		
 		$groups = Group::find();
@@ -117,9 +117,9 @@ class PhonebookController extends ControllerBase
 	public function editAction($number)
 	{
 			
-			$phonenumber = Phonenumber::findFirst('phoneNumber = \''.addslashes($number).'\'');
+			$phoneNumber = PhoneNumber::findFirst('phoneNumber = \''.addslashes($number).'\'');
 			
-			$people = People::findFirst('id = \''.addslashes($phonenumber->idPeople).'\'');
+			$people = People::findFirst('id = \''.addslashes($phoneNumber->idPeople).'\'');
 			
 			$people->name = addslashes($this->request->getPost()['name']);
 			
@@ -159,10 +159,10 @@ class PhonebookController extends ControllerBase
 		
 		}
 			$success = $people->save();
-			$phonenumber->phoneNumber = $this->request->getPost()['phone'];
-			$phonenumber->idTypePhoneNumber = $this->request->getPost()['typeNumber'];
+			$phoneNumber->phoneNumber = $this->request->getPost()['phone'];
+			$phoneNumber->idTypePhoneNumber = $this->request->getPost()['typeNumber'];
 			
-			$success = $phonenumber->save();
+			$success = $phoneNumber->save();
 			if ($success) {
 				$this->flash->success(
                 'Контакт успешно обновлён'
@@ -231,13 +231,13 @@ class PhonebookController extends ControllerBase
 		$success = $people->save();
 		if ($success) {
 			
-			$phonenumber = new phonenumber();
+			$phoneNumber = new PhoneNumber();
 	
-			$phonenumber->phoneNumber = addslashes($this->request->getPost()['phone']);
-			$phonenumber->idTypePhoneNumber = addslashes($this->request->getPost()['typeNumber']);
-			$phonenumber->idPeople = $people->id;
-			$phonenumber->idOperator = 1;
-			$success2 = $phonenumber->save();
+			$phoneNumber->phoneNumber = addslashes($this->request->getPost()['phone']);
+			$phoneNumber->idTypePhoneNumber = addslashes($this->request->getPost()['typeNumber']);
+			$phoneNumber->idPeople = $people->id;
+			$phoneNumber->idOperator = 1;
+			$success2 = $phoneNumber->save();
 			if ($success2) {
 				$this->flash->success(
                 'Контакт успешно добавлен'
@@ -281,7 +281,7 @@ class PhonebookController extends ControllerBase
 
 	public function deleteAction($number)
 	{
-		$Phone = Phonenumber::find('phoneNumber = \''.$number.'\'');
+		$Phone = PhoneNumber::find('phoneNumber = \''.$number.'\'');
 
 		if ($Phone !== false) {
 			if ($Phone->delete() === false) {
