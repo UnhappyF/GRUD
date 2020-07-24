@@ -226,7 +226,7 @@ class PhonebookController extends ControllerBase
         );
 			}else {
 				$this->flash->error(
-                'Ошибка при добавление контакта'
+                'Ошибка при добавление контакта.Введите номер контакта'
             );
 				return $this->dispatcher->forward(
             [
@@ -237,7 +237,7 @@ class PhonebookController extends ControllerBase
 			}
 		} else {
 				$this->flash->error(
-                'Введите имя контакта'
+                'Ошибка при добавление контакта.Введите имя контакта'
             );
 				return $this->dispatcher->forward(
             [
