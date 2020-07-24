@@ -144,7 +144,7 @@ input[type=date] {
 	<tr>
 	<td colspan="7">
 	<div>';
-	echo $this->tag->linkTo(["phonebook/search", "Первая",'class' => 'btn btn-secondary','style' =>'border: 2px solid black']).' ';
+	echo $this->tag->linkTo(["phonebook/search?page=".$page->first, "Первая",'class' => 'btn btn-secondary','style' =>'border: 2px solid black']).' ';
 	echo $this->tag->linkTo(["phonebook/search?page=".$page->previous, "Предыдущая",'class' => 'btn btn-secondary','style' =>'border: 2px solid black']).' ';
 	echo $this->tag->linkTo(["phonebook/search?page=".$page->next, "Следующая",'class' => 'btn btn-secondary','style' =>'border: 2px solid black']).' ';
 	echo $this->tag->linkTo(["phonebook/search?page=".$page->last, "Последняя",'class' => 'btn btn-secondary','style' =>'border: 2px solid black']).' ';
